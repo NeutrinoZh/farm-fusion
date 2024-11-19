@@ -23,7 +23,7 @@ namespace Game
     {
         public static readonly GameGridData defaultData = new()
         {
-            size = new Vector2Int(4, 5),
+            size = new Vector2Int(3, 4),
             objects = new()
         };
 
@@ -48,8 +48,8 @@ namespace Game
         public void Resize(Vector2Int size)
         {
             _transform.localScale = new Vector3(
-                defaultData.size.x / size.x,
-                defaultData.size.y / size.y,
+                (float)defaultData.size.x / size.x,
+                (float)defaultData.size.x / size.x,
                 1
             );
             _renderer.size = size;

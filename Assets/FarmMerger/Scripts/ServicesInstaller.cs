@@ -14,7 +14,11 @@ namespace Game
 
             Container.Bind<GameGrid>().AsSingle().NonLazy();
             Container.Bind<Transform>().FromInstance(_gameGrid).WhenInjectedInto<GameGrid>();
-            Container.Bind<GameGridData>().FromInstance(GameGrid.defaultData).WhenInjectedInto<GameGrid>();
+            Container.Bind<GameGridData>().FromInstance(new GameGridData()
+            {
+                size = new Vector2Int(4, 5),
+                objects = new()
+            }).WhenInjectedInto<GameGrid>();
         }
     }
 }
