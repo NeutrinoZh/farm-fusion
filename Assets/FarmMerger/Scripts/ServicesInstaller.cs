@@ -13,12 +13,8 @@ namespace Game
             Container.Bind<GridPrefabs>().FromInstance(_gridPrefabs);
 
             Container.Bind<GameGrid>().AsSingle().NonLazy();
-            Container.Bind<Transform>().FromInstance(_gameGrid).AsSingle().WhenInjectedInto<GameGrid>();
-            Container.Bind<GameGridData>().FromMethod(() => new()
-            {
-                size = new Vector2Int(4, 5),
-                objects = new()
-            }).AsSingle();
+            Container.Bind<Transform>().FromInstance(_gameGrid).WhenInjectedInto<GameGrid>();
+            Container.Bind<GameGridData>().FromInstance(GameGrid.defaultData).WhenInjectedInto<GameGrid>();
         }
     }
 }

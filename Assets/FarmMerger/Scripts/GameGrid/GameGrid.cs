@@ -21,6 +21,14 @@ namespace Game
 
     public class GameGrid
     {
+        public static readonly GameGridData defaultData = new()
+        {
+            size = new Vector2Int(4, 5),
+            objects = new()
+        };
+
+        private const string k_Background = "Background";
+
         private GameGridData _data;
         private GridPrefabs _prefabs;
 
@@ -32,7 +40,7 @@ namespace Game
             _data = data;
             _prefabs = prefabs;
             _transform = transform;
-            _renderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+            _renderer = transform.Find(k_Background).GetComponent<SpriteRenderer>();
 
             Resize(_data.size);
         }
@@ -40,8 +48,8 @@ namespace Game
         public void Resize(Vector2Int size)
         {
             _transform.localScale = new Vector3(
-                3f / size.x,
-                4f / size.y,
+                defaultData.size.x / size.x,
+                defaultData.size.y / size.y,
                 1
             );
             _renderer.size = size;
