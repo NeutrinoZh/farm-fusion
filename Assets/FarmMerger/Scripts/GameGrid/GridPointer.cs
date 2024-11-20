@@ -28,8 +28,8 @@ namespace Game
 
         private void GridResizeHandler()
         {
-            Debug.Log(transform.position);
-            transform.position = _gameGrid.GridPositionToWorldPosition(_position);
+            _pointer.position = _gameGrid.GridPositionToWorldPosition(_position);
+            Debug.Log(_pointer.position);
         }
     }
 }
