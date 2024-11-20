@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad6320667ceb4641aea25f5a4528f08, type: 3}
   m_Name: GridPrefabs
   m_EditorClassIdentifier: 
-  cellPrefab: {fileID: 0}
-  objectsPrefabs: []
+  objectsPrefabs:
+  - {fileID: 946923504580786976, guid: 33e97b19f6acff1478b4cd6460a81bd7, type: 3}

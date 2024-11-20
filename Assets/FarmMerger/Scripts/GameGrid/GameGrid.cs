@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Newtonsoft.Json;
 
 namespace Game
 {
@@ -21,11 +20,16 @@ namespace Game
 
     public class GameGrid
     {
-        public static readonly GameGridData defaultData = new()
+        public static readonly GameGridData k_defaultData = new()
         {
             size = new Vector2Int(3, 4),
             objects = new()
         };
+
+
+        public Action OnResize;
+
+        public Vector2Int Size => _data.size;
 
         private const string k_Background = "Background";
 
@@ -48,11 +52,23 @@ namespace Game
         public void Resize(Vector2Int size)
         {
             _transform.localScale = new Vector3(
-                (float)defaultData.size.x / size.x,
-                (float)defaultData.size.x / size.x,
+                (float)k_defaultData.size.x / size.x,
+                (float)k_defaultData.size.x / size.x,
                 1
             );
             _renderer.size = size;
+            _data.size = size;
+
+            OnResize?.Invoke();
+        }
+
+        public Vector3 GridPositionToWorldPosition(Vector2Int position)
+        {
+            return _transform.position + new Vector3(
+                position.x - Size.x / 2,
+                position.y - Size.y / 2,
+                0
+            );
         }
     };
 }
