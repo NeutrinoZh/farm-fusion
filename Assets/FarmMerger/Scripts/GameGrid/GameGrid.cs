@@ -39,6 +39,8 @@ namespace Game
         private Transform _transform;
         private SpriteRenderer _renderer;
 
+        private Vector2 _cellSize;
+
         public GameGrid(GameGridData data, GridPrefabs prefabs, Transform transform)
         {
             _data = data;
@@ -56,6 +58,7 @@ namespace Game
                 (float)k_defaultData.size.x / size.x,
                 1
             );
+
             _renderer.size = size;
             _data.size = size;
 
@@ -64,9 +67,9 @@ namespace Game
 
         public Vector3 GridPositionToWorldPosition(Vector2Int position)
         {
-            return _transform.position + new Vector3(
-                position.x - Size.x / 2,
-                position.y - Size.y / 2,
+            return new Vector3(
+               -Size.x / 2f + position.x + 0.5f,
+               -Size.y / 2f + position.y + 0.5f,
                 0
             );
         }

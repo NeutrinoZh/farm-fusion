@@ -28,7 +28,7 @@ namespace Game
 
         private void GridResizeHandler()
         {
-            _pointer.position = _gameGrid.GridPositionToWorldPosition(_position);
+            _pointer.localPosition = _gameGrid.GridPositionToWorldPosition(_position);
             Debug.Log(_pointer.position);
         }
     }
