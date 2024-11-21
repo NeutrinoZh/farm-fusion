@@ -7,6 +7,7 @@ namespace Game
     {
         [SerializeField] private Transform _gameGrid;
         [SerializeField] private GridPrefabs _gridPrefabs;
+        [SerializeField] private GridPointer _gridPointer;
 
         public override void InstallBindings()
         {
@@ -19,6 +20,8 @@ namespace Game
                 size = new Vector2Int(4, 5),
                 objects = new()
             }).WhenInjectedInto<GameGrid>();
+
+            Container.Bind<GridPointer>().FromInstance(_gridPointer);
         }
     }
 }
