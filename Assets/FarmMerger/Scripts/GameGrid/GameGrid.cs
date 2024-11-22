@@ -40,6 +40,8 @@ namespace Game
         private SpriteRenderer _renderer;
         private BoxCollider2D _collider;
 
+        private float _oddYOffset;
+
         public GameGrid(GameGridData data, GridPrefabs prefabs, Transform transform)
         {
             _data = data;
@@ -63,6 +65,8 @@ namespace Game
             _collider.size = size;
             _data.size = size;
 
+            _oddYOffset = size.y % 2 / 2f;
+
             OnResize?.Invoke();
         }
 
@@ -78,10 +82,9 @@ namespace Game
         public Vector2Int WorldPositionToGridPosition(Vector3 position)
         {
             var localPosition = _transform.InverseTransformPoint(position);
-            Debug.Log($"position: {position}, localPosition: {localPosition}");
             return new Vector2Int(
                 (int)(localPosition.x + Mathf.Ceil(Size.x / 2f)),
-                (int)(localPosition.y + Mathf.Floor(Size.y / 2f))
+                (int)(localPosition.y + Mathf.Ceil(Size.y / 2f) - _oddYOffset)
             );
         }
     };

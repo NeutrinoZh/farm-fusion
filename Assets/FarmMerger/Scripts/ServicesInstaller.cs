@@ -17,7 +17,7 @@ namespace Game
             Container.Bind<Transform>().FromInstance(_gameGrid).WhenInjectedInto<GameGrid>();
             Container.Bind<GameGridData>().FromInstance(new GameGridData()
             {
-                size = new Vector2Int(4, 5),
+                size = new Vector2Int(4, 6),
                 objects = new()
             }).WhenInjectedInto<GameGrid>();
 
