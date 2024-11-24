@@ -54,7 +54,7 @@ namespace Game
                 var obj = _grid.GetObjectOnPosition(position);
                 if (obj)
                 {
-                    if (obj.Compare(_draggedObject) && obj != _draggedObject)
+                    if (obj.Compare(_draggedObject) && obj != _draggedObject && _grid.GetMaxLevel(obj.Type) > obj.Level)
                         _grid.Merge(obj, _draggedObject);
                     else
                         obj.Position = _draggedObject.Position;

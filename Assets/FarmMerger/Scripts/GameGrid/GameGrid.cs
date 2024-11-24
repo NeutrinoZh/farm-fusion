@@ -152,6 +152,11 @@ namespace Game
             UnityEngine.Object.Destroy(obj.gameObject);
         }
 
+        public int GetMaxLevel(int type)
+        {
+            return _prefabs.objectsPrefabs[type].objectsPrefabs.Count - 1;
+        }
+
         public void Merge(GridObject lhs, GridObject rhs)
         {
             if (!_objectInstances.ContainsKey(lhs.Index) || !_objectInstances.ContainsKey(rhs.Index))
