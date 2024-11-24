@@ -25,7 +25,7 @@ namespace Game
             if (fingers.Count == 0)
                 return;
 
-            var worldPosition = Camera.main.ScreenToWorldPoint(fingers[0].lastTouch.screenPosition);
+            var worldPosition = Camera.main.ScreenToWorldPoint(fingers[0].screenPosition);
             worldPosition.z = 0;
             _draggedObject.transform.position = worldPosition;
         }
