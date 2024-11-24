@@ -1,15 +1,18 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Game
 {
-    public class GridPointer : MonoBehaviour
+    public class GridPointer : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private Transform _pointer;
+        private SpriteRenderer _renderer;
 
         private Vector2Int _position;
-        private GameGrid _gameGrid;
+        private GameGrid _grid;
 
+        private GridObject _selectedObject;
 
         public Vector2Int Position
         {
@@ -17,6 +20,7 @@ namespace Game
             set
             {
                 _position = value;
+                _renderer.enabled = _grid.HasObjectOnPosition(_position);
                 Reposition();
             }
         }
@@ -24,23 +28,39 @@ namespace Game
         [Inject]
         public void Construct(GameGrid gameGrid)
         {
-            _gameGrid = gameGrid;
+            _grid = gameGrid;
         }
 
         private void Awake()
         {
-            _gameGrid.OnResize += Reposition;
-            Reposition();
+            _renderer = _pointer.GetComponent<SpriteRenderer>();
+            _renderer.enabled = false;
+
+            _grid.OnResize += Reposition;
         }
 
         private void OnDestroy()
         {
-            _gameGrid.OnResize -= Reposition;
+            _grid.OnResize -= Reposition;
         }
 
         private void Reposition()
         {
-            _pointer.localPosition = _gameGrid.GridPositionToLocalPosition(_position);
+            _pointer.localPosition = _grid.GridPositionToLocalPosition(_position);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            var worldPosition = Camera.main.ScreenToWorldPoint(eventData.position);
+            var position = _grid.WorldPositionToGridPosition(worldPosition);
+
+            if (_selectedObject && position == _position)
+                _selectedObject.OnClick?.Invoke();
+            else
+            {
+                Position = position;
+                _selectedObject = _grid.GetObjectOnPosition(_position);
+            }
         }
     }
 }

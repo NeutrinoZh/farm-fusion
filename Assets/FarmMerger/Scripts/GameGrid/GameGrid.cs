@@ -1,63 +1,67 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
-    [Serializable]
-    public class GridObject
-    {
-        public int prefabIndex;
-        public Vector2Int position;
-    }
-
-    [Serializable]
-    public struct GameGridData
-    {
-        public Vector2Int size;
-        public List<GridObject> objects;
-    };
-
     public class GameGrid
     {
-        public static readonly GameGridData k_defaultData = new()
-        {
-            size = new Vector2Int(3, 4),
-            objects = new()
-        };
-
-
         public Action OnResize;
 
         public Vector2Int Size => _data.size;
 
         private const string k_Background = "Background";
 
-        private GameGridData _data;
+        private GridData _data;
         private GridPrefabs _prefabs;
+
+        private Dictionary<int, GridObject> _objectInstances;
+        private int _nextIndex;
 
         private Transform _transform;
         private SpriteRenderer _renderer;
         private BoxCollider2D _collider;
+        private DiContainer _diContainer;
 
         private float _oddYOffset;
 
-        public GameGrid(GameGridData data, GridPrefabs prefabs, Transform transform)
+        public GameGrid(GridData data, GridPrefabs prefabs, Transform transform, DiContainer container)
         {
             _data = data;
             _prefabs = prefabs;
             _transform = transform;
             _renderer = transform.Find(k_Background).GetComponent<SpriteRenderer>();
             _collider = transform.GetComponent<BoxCollider2D>();
+            _objectInstances = new();
+            _nextIndex = 0;
+            _diContainer = container;
 
             Resize(_data.size);
+        }
+
+        public GridObject AddObject(GridObjectData gridObject)
+        {
+            gridObject.index = _nextIndex++;
+
+            var instance = _diContainer.InstantiatePrefab(_prefabs.objectsPrefabs[gridObject.prefabIndex]).GetComponent<GridObject>();
+            var scale = instance.transform.localScale;
+
+            instance.transform.parent = _transform;
+            instance.transform.localScale = scale;
+            instance.Construct(gridObject, this);
+
+            _data.objects.Add(gridObject);
+            _objectInstances.Add(gridObject.index, instance);
+
+            return instance;
         }
 
         public void Resize(Vector2Int size)
         {
             _transform.localScale = new Vector3(
-                (float)k_defaultData.size.x / size.x,
-                (float)k_defaultData.size.x / size.x,
+                (float)GridData.k_defaultData.size.x / size.x,
+                (float)GridData.k_defaultData.size.x / size.x,
                 1
             );
 
@@ -79,6 +83,11 @@ namespace Game
             );
         }
 
+        public bool IsPositionCorrect(Vector2Int position)
+        {
+            return !(position.x < 0 || position.x >= Size.x || position.y < 0 || position.y >= Size.y);
+        }
+
         public Vector2Int WorldPositionToGridPosition(Vector3 position)
         {
             var localPosition = _transform.InverseTransformPoint(position);
@@ -86,6 +95,49 @@ namespace Game
                 (int)(localPosition.x + Mathf.Ceil(Size.x / 2f)),
                 (int)(localPosition.y + Mathf.Ceil(Size.y / 2f) - _oddYOffset)
             );
+        }
+
+        public bool HasObjectOnPosition(Vector2Int position)
+        {
+            foreach (var obj in _data.objects)
+                if (obj.position == position)
+                    return true;
+            return false;
+        }
+
+        public GridObject GetObjectOnPosition(Vector2Int position)
+        {
+            foreach (var obj in _data.objects)
+                if (obj.position == position)
+                    return _objectInstances[obj.index];
+            return null;
+        }
+
+        public bool GetRandomPosition(out Vector2Int position)
+        {
+            position = new Vector2Int();
+
+            int countFreeCells = Size.x * Size.y - _objectInstances.Count;
+
+            if (countFreeCells == 0)
+                return false;
+
+            for (int x = 0; x < Size.x; ++x)
+                for (int y = 0; y < Size.y; ++y)
+                {
+                    position.x = x;
+                    position.y = y;
+
+                    if (HasObjectOnPosition(position))
+                        continue;
+
+                    if (countFreeCells == 1 || UnityEngine.Random.Range(0, 4) == 0)
+                        return true;
+
+                    countFreeCells -= 1;
+                }
+
+            return GetRandomPosition(out position);
         }
     };
 }

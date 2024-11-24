@@ -6,6 +6,6 @@ namespace Game
     [CreateAssetMenu(fileName = "GridPrefabs", menuName = "Game", order = 0)]
     public class GridPrefabs : ScriptableObject
     {
-        public List<Transform> objectsPrefabs;
+        public List<GridObject> objectsPrefabs;
     }
 }

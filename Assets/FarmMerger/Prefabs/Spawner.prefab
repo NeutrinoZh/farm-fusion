@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 946923504580786976}
   - component: {fileID: 6164407311547377433}
   - component: {fileID: -8105442225704821896}
+  - component: {fileID: -2705580288034552170}
   m_Layer: 0
-  m_Name: Object
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 76772c6aeb30ae842aaa967474bd1a4b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: 0589248b3dbe36542a9a422ecabab256, type: 3}
+  m_Color: {r: 0.11163795, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,5 +96,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58dcf39a9a0e9d049bbbed119adcfe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2705580288034552170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2827220998454122196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51e8e974fc12fe46ab4e6962369a2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

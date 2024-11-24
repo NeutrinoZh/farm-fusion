@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Game
 {
-    public class GameGridController : MonoBehaviour, IPointerDownHandler
+    public class GameGridController : MonoBehaviour
     {
         private GameGrid _grid;
         private GridPointer _pointer;
@@ -16,10 +15,17 @@ namespace Game
             _pointer = pointer;
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        private void Awake()
         {
-            var worldPosition = Camera.main.ScreenToWorldPoint(eventData.position);
-            _pointer.Position = _grid.WorldPositionToGridPosition(worldPosition);
+            _grid.AddObject(new GridObjectData
+            {
+                prefabIndex = 1,
+                position = new Vector2Int()
+                {
+                    x = Random.Range(0, _grid.Size.x),
+                    y = Random.Range(0, _grid.Size.y),
+                }
+            });
         }
     }
 }
