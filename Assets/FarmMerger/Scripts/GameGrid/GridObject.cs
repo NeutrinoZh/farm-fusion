@@ -20,6 +20,11 @@ namespace Game
             }
         }
 
+        public int Type => _data.type;
+        public int Level => _data.level;
+        public int Index => _data.index;
+        public GridObjectData Data => _data;
+
         public void ResetPosition()
         {
             transform.localPosition = _grid.GridPositionToLocalPosition(_data.position);
@@ -31,6 +36,11 @@ namespace Game
             _grid = grid;
 
             Position = _data.position;
+        }
+
+        public bool Compare(GridObject rhs)
+        {
+            return rhs.Type == Type && rhs.Level == Level;
         }
     }
 }

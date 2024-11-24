@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad6320667ceb4641aea25f5a4528f08, type: 3}
-  m_Name: GridPrefabs
+  m_Script: {fileID: 11500000, guid: 3b45d7333849cf740a0ffc456ba64693, type: 3}
+  m_Name: ChickenCoop
   m_EditorClassIdentifier: 
   objectsPrefabs:
-  - {fileID: 11400000, guid: dff6854a4841436498174c747cc3e19b, type: 2}
-  - {fileID: 11400000, guid: 36b15f7c54ab9e64785bd77df850b2d5, type: 2}
+  - {fileID: -8105442225704821896, guid: 3ac3e347fac576b4eaddc4aa15c3ff86, type: 3}

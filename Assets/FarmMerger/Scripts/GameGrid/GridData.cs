@@ -10,7 +10,9 @@ namespace Game
     public class GridObjectData
     {
         public int index;
-        public int prefabIndex;
+        public int type;
+        public int level;
+
         public Vector2Int position;
     }
 

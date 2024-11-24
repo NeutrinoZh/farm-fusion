@@ -34,7 +34,7 @@ namespace Game
             if (_grid.GetRandomPosition(out Vector2Int position))
                 _grid.AddObject(new GridObjectData
                 {
-                    prefabIndex = 0,
+                    type = 1,
                     position = position
                 });
         }

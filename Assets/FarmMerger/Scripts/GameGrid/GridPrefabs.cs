@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Game
 {
-    [CreateAssetMenu(fileName = "GridPrefabs", menuName = "Game", order = 0)]
+    [CreateAssetMenu(fileName = "GridPrefabs", menuName = "Game/GridPrefabs")]
     public class GridPrefabs : ScriptableObject
     {
-        public List<GridObject> objectsPrefabs;
+        public List<GridObjectPrefabs> objectsPrefabs;
     }
 }

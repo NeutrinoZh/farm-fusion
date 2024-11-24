@@ -44,7 +44,8 @@ namespace Game
         {
             gridObject.index = _nextIndex++;
 
-            var instance = _diContainer.InstantiatePrefab(_prefabs.objectsPrefabs[gridObject.prefabIndex]).GetComponent<GridObject>();
+            var prefab = _prefabs.objectsPrefabs[gridObject.type].objectsPrefabs[gridObject.level];
+            var instance = _diContainer.InstantiatePrefab(prefab).GetComponent<GridObject>();
             var scale = instance.transform.localScale;
 
             instance.transform.parent = _transform;
@@ -138,6 +139,36 @@ namespace Game
                 }
 
             return GetRandomPosition(out position);
+        }
+
+        public void RemoveObject(GridObject obj)
+        {
+            if (!_objectInstances.ContainsKey(obj.Index))
+                return;
+
+            _objectInstances.Remove(obj.Index);
+            _data.objects.Remove(obj.Data);
+
+            UnityEngine.Object.Destroy(obj.gameObject);
+        }
+
+        public void Merge(GridObject lhs, GridObject rhs)
+        {
+            if (!_objectInstances.ContainsKey(lhs.Index) || !_objectInstances.ContainsKey(rhs.Index))
+                return;
+
+            if (lhs.Type != rhs.Type)
+                return;
+
+            AddObject(new GridObjectData()
+            {
+                type = lhs.Type,
+                level = lhs.Level + 1,
+                position = lhs.Position
+            });
+
+            RemoveObject(lhs);
+            RemoveObject(rhs);
         }
     };
 }

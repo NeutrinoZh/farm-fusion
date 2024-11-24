@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.EnhancedTouch;
 using Zenject;
 
 namespace Game
@@ -54,7 +53,13 @@ namespace Game
             {
                 var obj = _grid.GetObjectOnPosition(position);
                 if (obj)
-                    obj.Position = _draggedObject.Position;
+                {
+                    if (obj.Compare(_draggedObject) && obj != _draggedObject)
+                        _grid.Merge(obj, _draggedObject);
+                    else
+                        obj.Position = _draggedObject.Position;
+                }
+
                 _draggedObject.Position = position;
             }
 

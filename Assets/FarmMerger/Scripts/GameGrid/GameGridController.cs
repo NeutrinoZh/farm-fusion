@@ -19,7 +19,7 @@ namespace Game
         {
             _grid.AddObject(new GridObjectData
             {
-                prefabIndex = 1,
+                type = 0,
                 position = new Vector2Int()
                 {
                     x = Random.Range(0, _grid.Size.x),
