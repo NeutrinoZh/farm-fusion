@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.EnhancedTouch;
 using Zenject;
 
 namespace Game
@@ -14,6 +15,11 @@ namespace Game
         public void Construct(GameGrid grid)
         {
             _grid = grid;
+        }
+
+        private void Start()
+        {
+            EnhancedTouchSupport.Enable();
         }
 
         private void Update()
