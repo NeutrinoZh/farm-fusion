@@ -44,13 +44,13 @@ namespace Game
         {
             gridObject.index = _nextIndex++;
 
-            var prefab = _prefabs.objectsPrefabs[gridObject.type].objectsPrefabs[gridObject.level];
-            var instance = _diContainer.InstantiatePrefab(prefab).GetComponent<GridObject>();
+            var data = _prefabs.objectsPrefabs[gridObject.type].objectsPrefabs[gridObject.level];
+            var instance = _diContainer.InstantiatePrefab(data.prefab).GetComponent<GridObject>();
             var scale = instance.transform.localScale;
 
             instance.transform.parent = _transform;
             instance.transform.localScale = scale;
-            instance.Construct(gridObject, this);
+            instance.Construct(gridObject, this, data.price);
 
             _data.objects.Add(gridObject);
             _objectInstances.Add(gridObject.index, instance);

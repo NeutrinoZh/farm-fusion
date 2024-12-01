@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Root" picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: flex-start; align-self: stretch; flex-direction: column;">
+        <ui:VisualElement name="TopPanel" style="flex-grow: 1; height: 20%; background-color: rgba(88, 86, 86, 0.81); max-height: 20%; min-height: 20%;">
+            <ui:VisualElement name="Resources" style="flex-grow: 1;">
+                <ui:VisualElement name="Money" style="flex-grow: 1; justify-content: space-around;">
+                    <ui:Label tabindex="-1" text="Money: {}" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoneyLabel" style="-unity-text-align: upper-right;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Wheat" style="flex-grow: 1; justify-content: space-around;">
+                    <ui:Label tabindex="-1" text="Wheat: {}" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WheatLabel" style="-unity-text-align: upper-right;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="BottomPanel" style="flex-grow: 1; height: 20%; max-height: 20%; min-height: 20%; align-self: stretch; flex-direction: column; bottom: 0; position: absolute; background-color: rgba(149, 149, 149, 0.77); width: 100%; max-width: 100%; min-width: 100%;" />
+    </ui:VisualElement>
+</ui:UXML>

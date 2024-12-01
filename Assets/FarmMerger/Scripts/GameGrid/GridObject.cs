@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
     public class GridObject : MonoBehaviour
     {
         public Action OnClick;
+
+        private int _price;
 
         private GridObjectData _data;
         private GameGrid _grid;
@@ -24,16 +27,18 @@ namespace Game
         public int Level => _data.level;
         public int Index => _data.index;
         public GridObjectData Data => _data;
+        public int Price => _price;
 
         public void ResetPosition()
         {
             transform.localPosition = _grid.GridPositionToLocalPosition(_data.position);
         }
 
-        public void Construct(GridObjectData data, GameGrid grid)
+        public void Construct(GridObjectData data, GameGrid grid, int price)
         {
             _data = data;
             _grid = grid;
+            _price = price;
 
             Position = _data.position;
         }

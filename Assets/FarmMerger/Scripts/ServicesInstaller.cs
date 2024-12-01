@@ -17,9 +17,12 @@ namespace Game
             Container.Bind<Transform>().FromInstance(_gameGrid).WhenInjectedInto<GameGrid>();
             Container.Bind<GridData>().FromInstance(new GridData()
             {
-                size = new Vector2Int(4, 6),
+                size = new Vector2Int(6, 7),
                 objects = new()
             }).WhenInjectedInto<GameGrid>();
+
+            Container.Bind<ResourceManager>().AsSingle().NonLazy();
+            Container.Bind<ResourceData>().FromInstance(ResourceData.k_defaultData).WhenInjectedInto<ResourceManager>();
 
             Container.Bind<GridPointer>().FromInstance(_gridPointer);
         }

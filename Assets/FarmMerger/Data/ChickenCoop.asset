@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ChickenCoop
   m_EditorClassIdentifier: 
   objectsPrefabs:
-  - {fileID: -8105442225704821896, guid: 3ac3e347fac576b4eaddc4aa15c3ff86, type: 3}
+  - prefab: {fileID: -8105442225704821896, guid: 3ac3e347fac576b4eaddc4aa15c3ff86, type: 3}
+    price: 50

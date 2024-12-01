@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Chicken
   m_EditorClassIdentifier: 
   objectsPrefabs:
-  - {fileID: -8105442225704821896, guid: 33e97b19f6acff1478b4cd6460a81bd7, type: 3}
-  - {fileID: -8105442225704821896, guid: 3333f54688c35314f8390578304fc776, type: 3}
-  - {fileID: -8105442225704821896, guid: b11cf0c399703084393f731b1b4e643b, type: 3}
-  - {fileID: -8105442225704821896, guid: ddf6160101b9284448a22d332c4def84, type: 3}
+  - prefab: {fileID: -8105442225704821896, guid: 33e97b19f6acff1478b4cd6460a81bd7, type: 3}
+    price: 1
+  - prefab: {fileID: -8105442225704821896, guid: 3333f54688c35314f8390578304fc776, type: 3}
+    price: 5
+  - prefab: {fileID: -8105442225704821896, guid: b11cf0c399703084393f731b1b4e643b, type: 3}
+    price: 12
+  - prefab: {fileID: -8105442225704821896, guid: ddf6160101b9284448a22d332c4def84, type: 3}
+    price: 28

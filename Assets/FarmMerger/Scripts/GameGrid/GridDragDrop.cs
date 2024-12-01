@@ -7,6 +7,9 @@ namespace Game
 {
     public class GridDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
+        private const string _layerOfInteractable = "Interactable";
+
+        private LayerMask _layerMask;
         private GameGrid _grid;
 
         private GridObject _draggedObject;
@@ -20,6 +23,8 @@ namespace Game
         private void Start()
         {
             EnhancedTouchSupport.Enable();
+
+            _layerMask = LayerMask.GetMask(_layerOfInteractable);
         }
 
         private void Update()
@@ -45,17 +50,20 @@ namespace Game
 
         public void OnPointerUp(PointerEventData eventData)
         {
+            if (!_draggedObject)
+                return;
+
             var worldPosition = Camera.main.ScreenToWorldPoint(eventData.position);
             var position = _grid.WorldPositionToGridPosition(worldPosition);
 
-            if (!_grid.IsPositionCorrect(position))
-            {
-                _draggedObject.ResetPosition();
-                _draggedObject = null;
-                return;
-            }
+            if (_grid.IsPositionCorrect(position))
+                CorrectDrop();
+            else
+                IncorrectDrop();
 
-            if (_draggedObject)
+            _draggedObject = null;
+
+            void CorrectDrop()
             {
                 var obj = _grid.GetObjectOnPosition(position);
                 if (obj)
@@ -69,7 +77,14 @@ namespace Game
                 _draggedObject.Position = position;
             }
 
-            _draggedObject = null;
+            void IncorrectDrop()
+            {
+                _draggedObject.ResetPosition();
+
+                var hit = Physics2D.Raycast(worldPosition - Vector3.forward, Vector3.forward, _layerMask);
+                if (hit && hit.transform.TryGetComponent(out IOutOfGridDropHandler outOfGridDropHandler))
+                    outOfGridDropHandler.OnDrop(_draggedObject);
+            }
         }
     }
 }

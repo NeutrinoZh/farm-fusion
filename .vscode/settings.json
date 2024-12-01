@@ -58,6 +58,8 @@
     },
     "dotnet.defaultSolution": "FarmMerger.sln",
     "cSpell.words": [
-        "Scriptable"
+        "Interactable",
+        "Scriptable",
+        "Zenject"
     ]
 }
