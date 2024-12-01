@@ -4,10 +4,12 @@ using Zenject;
 
 namespace Game
 {
-    public class HUD : MonoBehaviour
+    public class GridUI
     {
-        [SerializeField] private UIDocument _uiDocument;
+        private UIDocument _uiDocument;
+        private Screens _screens;
 
+        private const string k_shopButton = "ShopButton";
         private const string k_moneyLabel = "MoneyLabel";
         private const string k_wheatLabel = "WheatLabel";
 
@@ -19,15 +21,22 @@ namespace Game
 
         private ResourceManager _resourceManager;
 
-        [Inject]
-        public void Construct(ResourceManager resourceManager)
+        public GridUI(Screens screens, UIDocument uiDocument, ResourceManager resourceManager)
         {
+            _screens = screens;
+            _uiDocument = uiDocument;
             _resourceManager = resourceManager;
+
+            QueryElements();
+            Subscribes();
         }
 
-        private void Awake()
+        private void QueryElements()
         {
             var root = _uiDocument.rootVisualElement;
+
+            VisualElement shopButton = root.Query<VisualElement>(k_shopButton);
+            shopButton.RegisterCallback<PointerDownEvent>(e => _screens.ShowShop(), TrickleDown.TrickleDown);
 
             _moneyLabel = root.Query<Label>(k_moneyLabel);
             _moneyPattern = _moneyLabel.text;
@@ -36,7 +45,7 @@ namespace Game
             _wheatPattern = _wheatLabel.text;
         }
 
-        private void Start()
+        private void Subscribes()
         {
             _resourceManager.OnMoneyChange += UpdateMoneyLabel;
             _resourceManager.OnWheatChange += UpdateWheatLabel;

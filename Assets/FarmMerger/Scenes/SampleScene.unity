@@ -368,7 +368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 796973647}
   - component: {fileID: 796973646}
-  - component: {fileID: 796973648}
+  - component: {fileID: 796973649}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -407,7 +407,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &796973648
+--- !u!114 &796973649
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 796973645}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c51a40ebe412a55488403c721e791cf9, type: 3}
+  m_Script: {fileID: 11500000, guid: 38bf906a4ea7d814cb2abc228d5a400a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _uiDocument: {fileID: 796973646}
@@ -996,6 +996,7 @@ MonoBehaviour:
   _gameGrid: {fileID: 997055085}
   _gridPrefabs: {fileID: 11400000, guid: f0b4c11131684bb439708cb3b76baa43, type: 2}
   _gridPointer: {fileID: 997055086}
+  _gridLevels: {fileID: 11400000, guid: 5f747cfcf30fa684da74085a9890a277, type: 2}
 --- !u!4 &2118491562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5493067084159739550, guid: 42ec493982cb50f4989aeda64dc69efe, type: 3}
