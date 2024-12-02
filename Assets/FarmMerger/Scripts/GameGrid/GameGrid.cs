@@ -25,6 +25,7 @@ namespace Game
         private DiContainer _diContainer;
 
         private float _oddYOffset;
+        private float _oddXOffset;
 
         public GameGrid(GridData data, GridPrefabs prefabs, Transform transform, DiContainer container)
         {
@@ -70,6 +71,7 @@ namespace Game
             _collider.size = size;
             _data.size = size;
 
+            _oddXOffset = size.x % 2 / 2f;
             _oddYOffset = size.y % 2 / 2f;
 
             OnResize?.Invoke();
@@ -93,7 +95,7 @@ namespace Game
         {
             var localPosition = _transform.InverseTransformPoint(position);
             return new Vector2Int(
-                (int)(localPosition.x + Mathf.Ceil(Size.x / 2f)),
+                (int)(localPosition.x + Mathf.Ceil(Size.x / 2f) - _oddXOffset),
                 (int)(localPosition.y + Mathf.Ceil(Size.y / 2f) - _oddYOffset)
             );
         }
