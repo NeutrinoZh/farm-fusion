@@ -11,7 +11,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="BottomPanel" style="flex-grow: 1; height: 20%; max-height: 20%; min-height: 20%; align-self: stretch; flex-direction: column; bottom: 0; position: absolute; background-color: rgba(149, 149, 149, 0.77); width: 100%; max-width: 100%; min-width: 100%; padding-top: 4%; padding-right: 4%; padding-bottom: 4%; padding-left: 4%;">
+            <ui:VisualElement name="BottomPanel" style="flex-grow: 1; height: 10%; max-height: 10%; min-height: 10%; align-self: stretch; flex-direction: column; bottom: 0; position: absolute; background-color: rgba(149, 149, 149, 0.77); width: 100%; max-width: 100%; min-width: 100%; padding-top: 4%; padding-right: 4%; padding-bottom: 4%; padding-left: 4%;">
                 <ui:VisualElement name="ShopButton" style="flex-grow: 1; max-width: 100px; min-width: 100px; max-height: 100px; min-height: 100px; width: 100px; height: 100px; background-color: rgba(72, 0, 0, 0.74);" />
             </ui:VisualElement>
         </ui:VisualElement>
