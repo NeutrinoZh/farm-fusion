@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -5,7 +7,16 @@ namespace Game
 {
     public class Spawner : MonoBehaviour
     {
+        [Serializable]
+        public struct SpawnableItem
+        {
+            public int typeId;
+            public float chanceToDrop;
+        };
+
+
         [SerializeField] private int _wheatCost;
+        [SerializeField] public List<SpawnableItem> items;
 
         private ResourceManager _resourceManager;
         private GridObject _gridObject;
@@ -44,9 +55,27 @@ namespace Game
             if (!_grid.GetRandomPosition(out Vector2Int position))
                 return;
 
+            if (items.Count == 0)
+                return;
+
+            float sumOfChances = 0;
+            float random = UnityEngine.Random.Range(0.0f, 1.0f);
+
+            SpawnableItem item = items[0];
+
+            for (int i = 0; i < items.Count; ++i)
+            {
+                sumOfChances += items[i].chanceToDrop;
+                if (sumOfChances > random)
+                {
+                    item = items[i];
+                    break;
+                }
+            }
+
             _grid.AddObject(new GridObjectData
             {
-                type = 1,
+                type = item.typeId,
                 position = position
             });
 

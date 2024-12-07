@@ -17,15 +17,13 @@ namespace Game
 
         private void Awake()
         {
-            _grid.AddObject(new GridObjectData
-            {
-                type = 0,
-                position = new Vector2Int()
-                {
-                    x = Random.Range(0, _grid.Size.x),
-                    y = Random.Range(0, _grid.Size.y),
-                }
-            });
+            for (int i = 0; i < 4; ++i)
+                if (_grid.GetRandomPosition(out Vector2Int position))
+                    _grid.AddObject(new GridObjectData
+                    {
+                        type = 0,
+                        position = position
+                    });
         }
     }
 }

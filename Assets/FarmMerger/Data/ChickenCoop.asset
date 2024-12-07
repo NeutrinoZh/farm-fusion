@@ -15,3 +15,7 @@ MonoBehaviour:
   objectsPrefabs:
   - prefab: {fileID: -8105442225704821896, guid: 3ac3e347fac576b4eaddc4aa15c3ff86, type: 3}
     price: 50
+  - prefab: {fileID: -8105442225704821896, guid: 41a2d52cb19b33f40abdab41778dc7c6, type: 3}
+    price: 100
+  - prefab: {fileID: -8105442225704821896, guid: b359d09c90fdeb645b58e56ad9fa01ca, type: 3}
+    price: 150
