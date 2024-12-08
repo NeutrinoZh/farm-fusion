@@ -5,14 +5,18 @@ using Zenject;
 
 namespace Game
 {
-    public class GridDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class GridDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
     {
         private const string _layerOfInteractable = "Interactable";
+        private const float _dragSensitive = 0.5f * 0.5f;
 
         private LayerMask _layerMask;
         private GameGrid _grid;
 
         private GridObject _draggedObject;
+
+        private bool _dragging;
+        private Vector3 _downPosition;
 
         [Inject]
         public void Construct(GameGrid grid)
@@ -29,6 +33,9 @@ namespace Game
 
         private void Update()
         {
+            if (!_dragging)
+                return;
+
             if (_draggedObject == null)
                 return;
 
@@ -43,13 +50,21 @@ namespace Game
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            var worldPosition = Camera.main.ScreenToWorldPoint(eventData.position);
-            var position = _grid.WorldPositionToGridPosition(worldPosition);
+            _downPosition = Camera.main.ScreenToWorldPoint(eventData.position);
+            var position = _grid.WorldPositionToGridPosition(_downPosition);
             _draggedObject = _grid.GetObjectOnPosition(position);
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
+            if (!_dragging)
+            {
+                _draggedObject = null;
+                return;
+            }
+
+            _dragging = false;
+
             if (!_draggedObject)
                 return;
 
@@ -85,6 +100,13 @@ namespace Game
                 if (hit && hit.transform.TryGetComponent(out IOutOfGridDropHandler outOfGridDropHandler))
                     outOfGridDropHandler.OnDrop(_draggedObject);
             }
+        }
+
+        public void OnPointerMove(PointerEventData eventData)
+        {
+            float sqrDistance = (_downPosition - Camera.main.ScreenToWorldPoint(eventData.position)).sqrMagnitude;
+            if (sqrDistance > _dragSensitive)
+                _dragging = true;
         }
     }
 }
