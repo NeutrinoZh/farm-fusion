@@ -13,6 +13,9 @@ namespace Game
         private GridObjectData _data;
         private GameGrid _grid;
 
+        private SpriteRenderer _sprite;
+        public SpriteRenderer Sprite => _sprite;
+
         public Vector2Int Position
         {
             get => _data.position;
@@ -28,6 +31,11 @@ namespace Game
         public int Index => _data.index;
         public GridObjectData Data => _data;
         public int Price => _price;
+
+        private void Awake()
+        {
+            _sprite = transform.GetComponent<SpriteRenderer>();
+        }
 
         public void ResetPosition()
         {

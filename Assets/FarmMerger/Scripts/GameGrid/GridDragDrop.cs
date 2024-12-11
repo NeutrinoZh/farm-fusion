@@ -7,13 +7,15 @@ namespace Game
 {
     public class GridDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
     {
-        private const string _layerOfInteractable = "Interactable";
-        private const float _dragSensitive = 0.5f * 0.5f;
+        private const string k_layerOfInteractable = "Interactable";
+        private const float k_dragSensitive = 0.5f * 0.5f;
+        private const int k_draggedSpriteOrder = 100;
 
         private LayerMask _layerMask;
         private GameGrid _grid;
 
         private GridObject _draggedObject;
+        private int _defaultSpriteOrder;
 
         private bool _dragging;
         private Vector3 _downPosition;
@@ -26,9 +28,13 @@ namespace Game
 
         private void Start()
         {
+#if UNITY_EDITOR
+            UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
+#endif
+
             EnhancedTouchSupport.Enable();
 
-            _layerMask = LayerMask.GetMask(_layerOfInteractable);
+            _layerMask = LayerMask.GetMask(k_layerOfInteractable);
         }
 
         private void Update()
@@ -52,13 +58,21 @@ namespace Game
         {
             _downPosition = Camera.main.ScreenToWorldPoint(eventData.position);
             var position = _grid.WorldPositionToGridPosition(_downPosition);
+
             _draggedObject = _grid.GetObjectOnPosition(position);
+            if (_draggedObject)
+            {
+                _defaultSpriteOrder = _draggedObject.Sprite.sortingOrder;
+                _draggedObject.Sprite.sortingOrder = k_draggedSpriteOrder;
+            }
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
             if (!_dragging)
             {
+                if (_draggedObject)
+                    _draggedObject.Sprite.sortingOrder = _defaultSpriteOrder;
                 _draggedObject = null;
                 return;
             }
@@ -76,6 +90,7 @@ namespace Game
             else
                 IncorrectDrop();
 
+            _draggedObject.Sprite.sortingOrder = _defaultSpriteOrder;
             _draggedObject = null;
 
             void CorrectDrop()
@@ -105,7 +120,7 @@ namespace Game
         public void OnPointerMove(PointerEventData eventData)
         {
             float sqrDistance = (_downPosition - Camera.main.ScreenToWorldPoint(eventData.position)).sqrMagnitude;
-            if (sqrDistance > _dragSensitive)
+            if (sqrDistance > k_dragSensitive)
                 _dragging = true;
         }
     }

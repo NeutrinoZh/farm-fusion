@@ -9,9 +9,11 @@ namespace Game
         [SerializeField] private GridPrefabs _gridPrefabs;
         [SerializeField] private GridPointer _gridPointer;
         [SerializeField] private GridLevels _gridLevels;
+        [SerializeField] private Env _env;
 
         public override void InstallBindings()
         {
+            Container.Bind<Env>().FromInstance(_env);
             Container.Bind<UpgradesData>().FromInstance(new UpgradesData()
             {
                 gridLevel = 0

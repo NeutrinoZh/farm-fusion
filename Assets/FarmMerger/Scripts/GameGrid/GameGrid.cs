@@ -12,6 +12,7 @@ namespace Game
         public Vector2Int Size => _data.size;
 
         private const string k_Background = "Background";
+        private const string k_EnvBackground = "Background";
 
         private GridData _data;
         private GridPrefabs _prefabs;
@@ -23,12 +24,14 @@ namespace Game
         private SpriteRenderer _renderer;
         private BoxCollider2D _collider;
         private DiContainer _diContainer;
+        private Env _env;
 
         private float _oddYOffset;
         private float _oddXOffset;
 
-        public GameGrid(GridData data, GridPrefabs prefabs, Transform transform, DiContainer container)
+        public GameGrid(Env env, GridData data, GridPrefabs prefabs, Transform transform, DiContainer container)
         {
+            _env = env;
             _data = data;
             _prefabs = prefabs;
             _transform = transform;
@@ -67,12 +70,23 @@ namespace Game
                 1
             );
 
+
             _renderer.size = size;
             _collider.size = size;
             _data.size = size;
 
-            _oddXOffset = size.x % 2 / 2f;
-            _oddYOffset = size.y % 2 / 2f;
+            bool isXOdd = size.x % 2 == 0;
+            bool isYOdd = size.y % 2 == 0;
+
+            _oddXOffset = isXOdd ? 0.5f : 0f;
+            _oddYOffset = isYOdd ? 0.5f : 0f;
+
+            _env.Background.size = size * 3;
+            _env.Background.transform.position = new Vector3(
+                isXOdd ? 0.15f : 0.1f,
+                isYOdd ? 0f : 0f,
+                0
+            );
 
             OnResize?.Invoke();
         }

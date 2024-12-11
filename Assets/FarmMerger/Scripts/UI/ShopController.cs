@@ -39,6 +39,8 @@ namespace Game
             if (_resourceManager.Money < level.price)
                 return;
 
+            _resourceManager.Money -= level.price;
+            _upgrades.gridLevel = nextLevel;
             _grid.Resize(level.size);
         }
     }
