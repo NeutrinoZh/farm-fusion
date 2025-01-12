@@ -85,8 +85,6 @@ namespace Game
             var worldPosition = Camera.main.ScreenToWorldPoint(eventData.position);
             var position = _grid.WorldPositionToGridPosition(worldPosition);
 
-            Debug.LogError($"position: {position}, correct: {_grid.IsPositionCorrect(position)}");
-
             if (_grid.IsPositionCorrect(position))
                 CorrectDrop();
             else
@@ -104,7 +102,6 @@ namespace Game
                         _grid.Merge(obj, _draggedObject);
                     else
                     {
-                        Debug.LogError($"Move object. From: {obj.Position} to {_draggedObject.Position}");
                         obj.Position = _draggedObject.Position;
                     }
                 }

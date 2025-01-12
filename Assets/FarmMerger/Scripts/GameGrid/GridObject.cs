@@ -37,6 +37,16 @@ namespace Game
             _sprite = transform.GetComponent<SpriteRenderer>();
         }
 
+        private void Start()
+        {
+            _grid.OnResize += ResetPosition;
+        }
+
+        private void OnDestroy()
+        {
+            _grid.OnResize -= ResetPosition;
+        }
+
         public void ResetPosition()
         {
             transform.localPosition = _grid.GridPositionToLocalPosition(_data.position);

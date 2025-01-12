@@ -45,20 +45,20 @@ namespace Game
             Resize(_data.size);
         }
 
-        public GridObject AddObject(GridObjectData gridObject)
+        public GridObject AddObject(GridObjectData objectData)
         {
-            gridObject.index = _nextIndex++;
+            objectData.index = _nextIndex++;
 
-            var data = _prefabs.objectsPrefabs[gridObject.type].objectsPrefabs[gridObject.level];
+            var data = _prefabs.objectsPrefabs[objectData.type].objectsPrefabs[objectData.level];
             var instance = _diContainer.InstantiatePrefab(data.prefab).GetComponent<GridObject>();
             var scale = instance.transform.localScale;
 
             instance.transform.parent = _transform;
             instance.transform.localScale = scale;
-            instance.Construct(gridObject, this, data.price);
+            instance.Construct(objectData, this, data.price);
 
-            _data.objects.Add(gridObject);
-            _objectInstances.Add(gridObject.index, instance);
+            _data.objects.Add(objectData);
+            _objectInstances.Add(objectData.index, instance);
 
             return instance;
         }
@@ -71,7 +71,6 @@ namespace Game
                 1
             );
 
-
             _renderer.size = size;
             _collider.size = size;
             _data.size = size;
@@ -82,10 +81,18 @@ namespace Game
             _oddXOffset = isXOdd ? 0f : 0.5f;
             _oddYOffset = isYOdd ? 0f : 0.5f;
 
-            _env.Background.size = size * 3;
+            _env.Background.size = new Vector2(
+                size.x * 2,
+                size.y * 2.5f
+            );
+            _env.Background.transform.localScale = new Vector3(
+                (float)GridData.k_defaultData.size.x / size.x,
+                (float)GridData.k_defaultData.size.x / size.x,
+                1
+            );
             _env.Background.transform.position = new Vector3(
-                isXOdd ? 0.15f : 0.1f,
-                isYOdd ? 0f : 0f,
+                isXOdd ? 0f : 0.5f,
+                isYOdd ? 0.35f : -0.15f,
                 0
             );
 
