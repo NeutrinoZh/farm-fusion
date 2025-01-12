@@ -79,8 +79,8 @@ namespace Game
             bool isXOdd = size.x % 2 == 0;
             bool isYOdd = size.y % 2 == 0;
 
-            _oddXOffset = isXOdd ? 0.5f : 0f;
-            _oddYOffset = isYOdd ? 0.5f : 0f;
+            _oddXOffset = isXOdd ? 0f : 0.5f;
+            _oddYOffset = isYOdd ? 0f : 0.5f;
 
             _env.Background.size = size * 3;
             _env.Background.transform.position = new Vector3(
