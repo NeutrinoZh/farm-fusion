@@ -83,7 +83,7 @@ namespace Game
 
             _env.Background.size = new Vector2(
                 size.x * 2,
-                size.y * 2.5f
+                size.y * 3f
             );
             _env.Background.transform.localScale = new Vector3(
                 (float)GridData.k_defaultData.size.x / size.x,
