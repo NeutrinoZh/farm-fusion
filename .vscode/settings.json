@@ -56,7 +56,7 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "FarmMerger.sln",
+    "dotnet.defaultSolution": "farm-fusion.sln",
     "cSpell.words": [
         "Interactable",
         "Scriptable",
