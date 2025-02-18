@@ -9,7 +9,6 @@ namespace Game
         private UIDocument _uiDocument;
         private Screens _screens;
 
-        private const string k_shopButton = "ShopButton";
         private const string k_moneyLabel = "MoneyLabel";
         private const string k_wheatLabel = "WheatLabel";
 
@@ -34,9 +33,6 @@ namespace Game
         private void QueryElements()
         {
             var root = _uiDocument.rootVisualElement;
-
-            VisualElement shopButton = root.Query<VisualElement>(k_shopButton);
-            shopButton.RegisterCallback<PointerDownEvent>(e => _screens.ShowShop(), TrickleDown.TrickleDown);
 
             _moneyLabel = root.Query<Label>(k_moneyLabel);
             _moneyPattern = _moneyLabel.text;

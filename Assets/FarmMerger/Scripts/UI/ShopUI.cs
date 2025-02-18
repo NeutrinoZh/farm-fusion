@@ -11,19 +11,21 @@ namespace Game
         private const string k_exitButtonId = "ExitButton";
 
         private Screens _screens;
+        private VisualElement _shopRoot;
         private VisualElement _root;
 
-        public ShopUI(Screens screens, VisualElement shopGroup)
+        public ShopUI(Screens screens, VisualElement shopGroup, VisualElement root)
         {
             _screens = screens;
-            _root = shopGroup;
+            _shopRoot = shopGroup;
+            _root = root;
 
             Initialize();
         }
 
         private void Initialize()
         {
-            VisualElement increaseGridSizeButton = _root.Query<VisualElement>(k_increaseGridSizeButtonId);
+            VisualElement increaseGridSizeButton = _shopRoot.Query<VisualElement>(k_increaseGridSizeButtonId);
             increaseGridSizeButton.RegisterCallback<PointerDownEvent>(e => OnBuyIncreaseGridSize?.Invoke(), TrickleDown.TrickleDown);
 
             VisualElement exitButton = _root.Query<VisualElement>(k_exitButtonId);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,9 @@ namespace Game
 {
     public class Screens : MonoBehaviour
     {
+        public Action OnHideAll;
+        public Action OnShowShop;
+
         [SerializeField] private UIDocument _uiDocument;
 
         private const string k_hudId = "HUD";
@@ -17,6 +21,7 @@ namespace Game
         private VisualElement _shopGroup;
 
         private GridUI _gridUI;
+        private TabBarUI _tabBarUI;
         private ShopUI _shopUI;
 
         private DiContainer _diContainer;
@@ -37,7 +42,10 @@ namespace Game
             _gridUI = new GridUI(this, _uiDocument, _diContainer.Resolve<ResourceManager>());
             _diContainer.Bind<GridUI>().FromInstance(_gridUI);
 
-            _shopUI = new ShopUI(this, _shopGroup);
+            _tabBarUI = new TabBarUI(this, root);
+            _diContainer.Bind<TabBarUI>().FromInstance(_tabBarUI);
+
+            _shopUI = new ShopUI(this, _shopGroup, root);
             _diContainer.Bind<ShopUI>().FromInstance(_shopUI);
 
             _diContainer.Instantiate<ShopController>();
@@ -48,11 +56,13 @@ namespace Game
         public void HideAll()
         {
             _shopGroup.style.display = DisplayStyle.None;
+            OnHideAll?.Invoke();
         }
 
         public void ShowShop()
         {
             _shopGroup.style.display = DisplayStyle.Flex;
+            OnShowShop?.Invoke();
         }
     }
 }
