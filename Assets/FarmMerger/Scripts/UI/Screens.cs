@@ -17,6 +17,9 @@ namespace Game
         private const string k_hudId = "HUD";
         private const string k_shopId = "Shop";
 
+        private const int k_bottomOffsetHide = -450;
+        private const int k_bottomOffsetShow = 0;
+
         private VisualElement _hudGroup;
         private VisualElement _shopGroup;
 
@@ -55,13 +58,13 @@ namespace Game
 
         public void HideAll()
         {
-            _shopGroup.style.display = DisplayStyle.None;
+            _shopGroup.style.bottom = k_bottomOffsetHide;
             OnHideAll?.Invoke();
         }
 
         public void ShowShop()
         {
-            _shopGroup.style.display = DisplayStyle.Flex;
+            _shopGroup.style.bottom = k_bottomOffsetShow;
             OnShowShop?.Invoke();
         }
     }

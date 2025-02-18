@@ -1,0 +1,8 @@
+.tab_button {
+    width: 25px;
+    height: 27px;
+    max-height: 27px;
+    min-height: 27px;
+    max-width: 25px;
+    min-width: 25px;
+}
