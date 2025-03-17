@@ -1,0 +1,77 @@
+.tab_button {
+    width: 25px;
+    height: 27px;
+    max-height: 27px;
+    min-height: 27px;
+    max-width: 25px;
+    min-width: 25px;
+}
+
+.float_panel {
+    flex-grow: 1;
+    position: absolute;
+    
+    width: 100%;
+    height: 100%;
+    
+    visibility: visible;
+    display: flex;
+    
+    background-color: rgba(0, 0, 0, 0);
+    
+    transition-property: bottom;
+    bottom: 0;
+    transition-duration: 1s;
+}
+
+.float_panel #PopUp {
+    flex-grow: 1; 
+    
+    margin-top: 40%;
+    margin-right: 0;
+    margin-bottom: 16%;
+    margin-left: 0;
+    
+    background-color: rgba(253, 243, 255, 0);
+    
+    width: 105%;
+    align-self: center;
+}
+
+.float_panel #PopUp #Header {
+    flex-grow: 1;
+    
+    max-height: 10%;
+    height: 20px;
+    
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    display: none;
+}
+
+.float_panel #PopUp #Body {
+    flex-grow: 1; 
+    
+    align-items: center;
+    justify-content: flex-start;
+    
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px; 
+    border-bottom-right-radius: 0; 
+    border-bottom-left-radius: 0; 
+    
+    border-left-color: rgb(82, 207, 255);
+    border-right-color: rgb(82, 207, 255);
+    border-top-color: rgb(82, 207, 255);
+    border-bottom-color: rgb(82, 207, 255); 
+    border-top-width: 3px; 
+    border-right-width: 3px;
+    border-bottom-width: 0;
+    border-left-width: 3px; 
+    background-color: rgb(253, 243, 255);
+    padding-top: 5%;
+    
+    overflow: hidden;
+}

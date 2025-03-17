@@ -1,6 +1,4 @@
-using UnityEngine;
 using UnityEngine.UIElements;
-using Zenject;
 
 namespace Game
 {

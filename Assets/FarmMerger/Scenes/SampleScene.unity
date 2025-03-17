@@ -643,6 +643,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiDocument: {fileID: 796973646}
+  _shopProductTemplate: {fileID: 9197481963319205126, guid: e37de5927fa2b604c9e9ae43de9fef41, type: 3}
+  _shopProductsList:
+  - {fileID: 11400000, guid: af947a9dd064b3041a76427325b90284, type: 2}
+  - {fileID: 11400000, guid: 629af3f9e863edb4c9f3b0a08839b095, type: 2}
+  - {fileID: 11400000, guid: 398145f8366b4fa4ab2b290b436105d4, type: 2}
+  - {fileID: 11400000, guid: 398145f8366b4fa4ab2b290b436105d4, type: 2}
+  - {fileID: 11400000, guid: af947a9dd064b3041a76427325b90284, type: 2}
+  - {fileID: 11400000, guid: 629af3f9e863edb4c9f3b0a08839b095, type: 2}
+  - {fileID: 11400000, guid: 398145f8366b4fa4ab2b290b436105d4, type: 2}
+  - {fileID: 11400000, guid: af947a9dd064b3041a76427325b90284, type: 2}
+  - {fileID: 11400000, guid: 629af3f9e863edb4c9f3b0a08839b095, type: 2}
+  - {fileID: 11400000, guid: 398145f8366b4fa4ab2b290b436105d4, type: 2}
+  - {fileID: 11400000, guid: af947a9dd064b3041a76427325b90284, type: 2}
+  - {fileID: 11400000, guid: 629af3f9e863edb4c9f3b0a08839b095, type: 2}
+  - {fileID: 11400000, guid: 398145f8366b4fa4ab2b290b436105d4, type: 2}
+  - {fileID: 11400000, guid: af947a9dd064b3041a76427325b90284, type: 2}
+  - {fileID: 11400000, guid: 629af3f9e863edb4c9f3b0a08839b095, type: 2}
+  - {fileID: 11400000, guid: 398145f8366b4fa4ab2b290b436105d4, type: 2}
+  - {fileID: 11400000, guid: af947a9dd064b3041a76427325b90284, type: 2}
+  - {fileID: 11400000, guid: 629af3f9e863edb4c9f3b0a08839b095, type: 2}
+  - {fileID: 11400000, guid: 398145f8366b4fa4ab2b290b436105d4, type: 2}
 --- !u!1 &963079181
 GameObject:
   m_ObjectHideFlags: 0

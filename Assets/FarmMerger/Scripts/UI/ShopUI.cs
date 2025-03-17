@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine.UIElements;
 
 namespace Game
@@ -6,30 +7,21 @@ namespace Game
     public class ShopUI
     {
         public event Action OnBuyIncreaseGridSize;
-
-        private const string k_increaseGridSizeButtonId = "GridSizeButton";
-        private const string k_exitButtonId = "ExitButton";
-
+        
         private Screens _screens;
         private VisualElement _shopRoot;
         private VisualElement _root;
+        
+        private ShopProductsList _shopProductsList;
 
-        public ShopUI(Screens screens, VisualElement shopGroup, VisualElement root)
+        public ShopUI(Screens screens, VisualElement shopGroup, VisualElement root, VisualTreeAsset template, List<ShopProductData> shopProductsList)
         {
             _screens = screens;
             _shopRoot = shopGroup;
             _root = root;
 
-            Initialize();
-        }
-
-        private void Initialize()
-        {
-            VisualElement increaseGridSizeButton = _shopRoot.Query<VisualElement>(k_increaseGridSizeButtonId);
-            increaseGridSizeButton.RegisterCallback<PointerDownEvent>(e => OnBuyIncreaseGridSize?.Invoke(), TrickleDown.TrickleDown);
-
-            VisualElement exitButton = _root.Query<VisualElement>(k_exitButtonId);
-            exitButton.RegisterCallback<PointerDownEvent>(e => _screens.HideAll(), TrickleDown.TrickleDown);
+            _shopProductsList = new ShopProductsList();
+            _shopProductsList.InitializeList(_shopRoot, template, shopProductsList);
         }
     }
 }
