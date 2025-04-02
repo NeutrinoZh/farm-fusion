@@ -32,4 +32,7 @@ obj/
 /[Cc]odeCoverage/
 Keystore/
 
+/.idea/
+/.vscode/
+
 Assets/GooglePlayGames/com.google.play.games/Editor/
