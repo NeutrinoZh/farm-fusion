@@ -9,9 +9,11 @@ namespace Game
 {
     public class Screens : MonoBehaviour
     {
-        public Action OnHideAll;
-        public Action OnShowShop;
-        public Action OnShowAchievements;
+        public event Action OnHideAll;
+        public event Action OnShowShop;
+        public event Action OnShowAchievements;
+        public event Action OnShowMap;
+        public event Action OnShowAdvice;
 
         [SerializeField] private UIDocument _uiDocument;
 
@@ -21,13 +23,20 @@ namespace Game
         private const string k_hudId = "HUD";
         private const string k_shopId = "Shop";
         private const string k_achievementsId = "Achievements";
+        private const string k_mapId = "Map";
+        private const string k_adviceId = "Advice";
 
-        private const int k_bottomOffsetHide = -450;
+        private const int k_bottomOffsetHide = -480;
         private const int k_bottomOffsetShow = 0;
+        
+        private const float k_opacityHide = 0;
+        private const float k_opacityShow = 0.8f;
 
         private VisualElement _hudGroup;
         private VisualElement _shopGroup;
         private VisualElement _achievementGroup;
+        private VisualElement _mapGroup;
+        private VisualElement _adviceGroup;
 
         private GridUI _gridUI;
         private TabBarUI _tabBarUI;
@@ -48,7 +57,9 @@ namespace Game
             _hudGroup = root.Q<VisualElement>(k_hudId);
             _shopGroup = root.Q<VisualElement>(k_shopId);
             _achievementGroup = root.Q<VisualElement>(k_achievementsId);
-
+            _mapGroup = root.Q<VisualElement>(k_mapId);
+            _adviceGroup = root.Q<VisualElement>(k_adviceId);
+            
             _gridUI = new GridUI(this, _uiDocument, _diContainer.Resolve<ResourceManager>());
             _diContainer.Bind<GridUI>().FromInstance(_gridUI);
 
@@ -67,20 +78,38 @@ namespace Game
         {
             _shopGroup.style.bottom = k_bottomOffsetHide;
             _achievementGroup.style.bottom = k_bottomOffsetHide;
+            _mapGroup.style.bottom = k_bottomOffsetHide;
+            _adviceGroup.style.opacity = k_opacityHide;
             
             OnHideAll?.Invoke();
         }
 
         public void ShowShop()
         {
+            HideAll();
             _shopGroup.style.bottom = k_bottomOffsetShow;
             OnShowShop?.Invoke();
         }
 
         public void ShowAchievements()
         {
+            HideAll();
             _achievementGroup.style.bottom = k_bottomOffsetShow;
             OnShowAchievements?.Invoke();
+        }
+
+        public void ShowMap()
+        {
+            HideAll();
+            _mapGroup.style.bottom = k_bottomOffsetShow;
+            OnShowMap?.Invoke();
+        }
+
+        public void ShowAdvice()
+        {
+            HideAll();
+            _adviceGroup.style.opacity = k_opacityShow;
+            OnShowAdvice?.Invoke();
         }
     }
 }
