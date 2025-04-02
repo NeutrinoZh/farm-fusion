@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 946923504580786976}
   - component: {fileID: 6164407311547377433}
   - component: {fileID: -8105442225704821896}
+  - component: {fileID: 5373031240470531107}
   m_Layer: 0
   m_Name: Chicken-3
   m_TagString: Untagged
@@ -95,5 +96,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58dcf39a9a0e9d049bbbed119adcfe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5373031240470531107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2827220998454122196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11216771f3f8428096f7da6fd2546beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

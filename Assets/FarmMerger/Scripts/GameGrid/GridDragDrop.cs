@@ -42,7 +42,7 @@ namespace Game
             if (!_dragging)
                 return;
 
-            if (_draggedObject == null)
+            if (!_draggedObject)
                 return;
 
             var fingers = UnityEngine.InputSystem.EnhancedTouch.Touch.fingers;

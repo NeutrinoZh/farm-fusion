@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
 using Zenject;
@@ -46,7 +47,7 @@ namespace Game
         {
             _grid.OnResize -= ResetPosition;
         }
-
+        
         public void ResetPosition()
         {
             transform.localPosition = _grid.GridPositionToLocalPosition(_data.position);
