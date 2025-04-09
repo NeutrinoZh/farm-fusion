@@ -9,8 +9,7 @@ namespace Game
 
         public void SetVisualElement(VisualElement visualElement)
         {
-            _productTitle = visualElement.Q<Label>("ProductTitle");
-        }
+            _productTitle = visualElement.Q<Label>("ProductTitle"); }
 
         public void SetProductData(ShopProductData shopProductData)
         {

@@ -11,10 +11,12 @@ namespace Game
         private GridLevels _gridLevels;
         private GameGrid _grid;
         private ShopUI _ui;
+        private Screens _screens;
 
         [Inject]
-        public ShopController(UpgradesData upgrades, GridLevels gridLevels, ResourceManager resourceManager, GameGrid grid, ShopUI shopUI)
+        public ShopController(Screens screens, UpgradesData upgrades, GridLevels gridLevels, ResourceManager resourceManager, GameGrid grid, ShopUI shopUI)
         {
+            _screens = screens;
             _upgrades = upgrades;
             _gridLevels = gridLevels;
             _resourceManager = resourceManager;
@@ -26,11 +28,19 @@ namespace Game
 
         private void Initialize()
         {
-            _ui.OnBuyIncreaseGridSize += IncreaseGridSize;
+            _ui.OnBuyProduct += ShowPopup;
         }
 
-        public void IncreaseGridSize()
+        private void ShowPopup(ShopProductData product)
         {
+            _screens.ShowPurchasePopup();
+        }
+
+        private void Product(ShopProductData product)
+        {
+            if (product.ProductId != 0)
+                return;
+            
             int nextLevel = _upgrades.gridLevel + 1;
             if (nextLevel >= _gridLevels.levels.Count)
                 return;

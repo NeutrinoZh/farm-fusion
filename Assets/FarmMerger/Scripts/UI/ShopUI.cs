@@ -6,22 +6,32 @@ namespace Game
 {
     public class ShopUI
     {
-        public event Action OnBuyIncreaseGridSize;
+        public event Action<ShopProductData> OnBuyProduct;
         
-        private Screens _screens;
-        private VisualElement _shopRoot;
-        private VisualElement _root;
-        
-        private ShopProductsList _shopProductsList;
-
-        public ShopUI(Screens screens, VisualElement shopGroup, VisualElement root, VisualTreeAsset template, List<ShopProductData> shopProductsList)
+        public ShopUI(VisualElement root, VisualTreeAsset listEntryTemplate, List<ShopProductData> shopProductsList)
         {
-            _screens = screens;
-            _shopRoot = shopGroup;
-            _root = root;
+            var listView = root.Q<ScrollView>("Body");
+            
+            foreach (ShopProductData shopProductData in shopProductsList)
+            {
+                var newListEntry = listEntryTemplate.Instantiate();
 
-            _shopProductsList = new ShopProductsList();
-            _shopProductsList.InitializeList(_shopRoot, template, shopProductsList);
+                var newListEntryLogic = new ShopProductController();
+                newListEntry.userData = newListEntryLogic;
+
+                newListEntryLogic.SetVisualElement(newListEntry);
+                newListEntryLogic.SetProductData(shopProductData);
+                
+                var buyButton = newListEntry.Q<VisualElement>("BuyButton");
+                buyButton.RegisterCallback<PointerDownEvent>(e => Handle(shopProductData), TrickleDown.TrickleDown);
+                
+                listView.Add(newListEntry);
+            }
+        }
+
+        private void Handle(ShopProductData productData)
+        {
+            OnBuyProduct?.Invoke(productData);
         }
     }
 }

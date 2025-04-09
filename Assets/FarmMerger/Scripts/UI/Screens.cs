@@ -25,23 +25,29 @@ namespace Game
         private const string k_achievementsId = "Achievements";
         private const string k_mapId = "Map";
         private const string k_adviceId = "Advice";
+        private const string k_foggingId = "Fogging";
+        private const string k_purchasePopupId = "PurchasePopup";
 
         private const int k_bottomOffsetHide = -480;
         private const int k_bottomOffsetShow = 0;
         
         private const float k_opacityHide = 0;
         private const float k_opacityShow = 0.8f;
+        private const float k_delayBeforeDisableFogging = 0.5f;
 
         private VisualElement _hudGroup;
         private VisualElement _shopGroup;
         private VisualElement _achievementGroup;
         private VisualElement _mapGroup;
         private VisualElement _adviceGroup;
+        private VisualElement _foggingGroup;
+        private VisualElement _purchasePopup;
 
         private GridUI _gridUI;
         private TabBarUI _tabBarUI;
         private ShopUI _shopUI;
-
+        private PurchasePopup _purchasePopupUI;
+        
         private DiContainer _diContainer;
 
         [Inject]
@@ -59,6 +65,8 @@ namespace Game
             _achievementGroup = root.Q<VisualElement>(k_achievementsId);
             _mapGroup = root.Q<VisualElement>(k_mapId);
             _adviceGroup = root.Q<VisualElement>(k_adviceId);
+            _foggingGroup = root.Q<VisualElement>(k_foggingId);
+            _purchasePopup = root.Q<VisualElement>(k_purchasePopupId);
             
             _gridUI = new GridUI(this, _uiDocument, _diContainer.Resolve<ResourceManager>());
             _diContainer.Bind<GridUI>().FromInstance(_gridUI);
@@ -66,20 +74,26 @@ namespace Game
             _tabBarUI = new TabBarUI(this, root);
             _diContainer.Bind<TabBarUI>().FromInstance(_tabBarUI);
 
-            _shopUI = new ShopUI(this, _shopGroup, root, _shopProductTemplate, _shopProductsList);
+            _shopUI = new ShopUI(root, _shopProductTemplate, _shopProductsList);
             _diContainer.Bind<ShopUI>().FromInstance(_shopUI);
 
+            _purchasePopupUI = new PurchasePopup(this, _purchasePopup);
+            _diContainer.Bind<PurchasePopup>().FromInstance(_purchasePopupUI);
+            
+            _diContainer.Bind<Screens>().FromInstance(this);
             _diContainer.Instantiate<ShopController>();
 
             HideAll();
         }
-
+        
         public void HideAll()
         {
             _shopGroup.style.bottom = k_bottomOffsetHide;
             _achievementGroup.style.bottom = k_bottomOffsetHide;
             _mapGroup.style.bottom = k_bottomOffsetHide;
-            _adviceGroup.style.opacity = k_opacityHide;
+             _adviceGroup.style.opacity = k_opacityHide;
+
+            HidePopups();
             
             OnHideAll?.Invoke();
         }
@@ -110,6 +124,28 @@ namespace Game
             HideAll();
             _adviceGroup.style.opacity = k_opacityShow;
             OnShowAdvice?.Invoke();
+        }
+
+        public void ShowPurchasePopup()
+        {
+            _purchasePopup.style.bottom = k_bottomOffsetShow;
+            
+            _foggingGroup.style.display = DisplayStyle.Flex;
+            _foggingGroup.style.opacity = k_opacityShow;
+        }
+
+        public void HidePopups()
+        {
+            _purchasePopup.style.bottom = k_bottomOffsetHide;
+            _foggingGroup.style.opacity = k_opacityHide;
+            
+            StartCoroutine(SwitcherDisplayPopupCoroutine());
+        }
+
+        private IEnumerator SwitcherDisplayPopupCoroutine()
+        {
+            yield return new WaitForSeconds(k_delayBeforeDisableFogging);
+            _foggingGroup.style.display = DisplayStyle.None;
         }
     }
 }
