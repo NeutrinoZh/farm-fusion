@@ -37,12 +37,25 @@ namespace Game
 
         private void ShowPopup(ShopProductData product)
         {
-            _screens.ShowPurchasePopup(product);
+            _screens.ShowPurchasePopup(product, GetPurchasePopupType(product));
         }
 
-        private void PurchaseHandle(ShopProductsEnum product)
+        private PurchasePopup.PopUpType GetPurchasePopupType(ShopProductData product)
         {
-            switch (product)
+            if (_resourceManager.Money < product.Price)
+                return PurchasePopup.PopUpType.NotEnoughMoney;
+
+            if (product.IsObject && !_grid.GetRandomPosition(out Vector2Int _))
+                return PurchasePopup.PopUpType.NotEnoughSpace;
+
+            return PurchasePopup.PopUpType.Purchase;
+        }
+        
+        private void PurchaseHandle(ShopProductData product)
+        {
+            _resourceManager.Money -= product.Price;
+            
+            switch (product.Id)
             {
                 case ShopProductsEnum.IncreaseGridSize:
                     IncreaseGridSize();
@@ -86,10 +99,7 @@ namespace Game
                 return;
 
             var level = _gridLevels.levels[nextLevel];
-            if (_resourceManager.Money < level.price)
-                return;
-
-            _resourceManager.Money -= level.price;
+            
             _upgrades.gridLevel = nextLevel;
             _grid.Resize(level.size);
         }
