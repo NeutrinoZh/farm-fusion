@@ -6,11 +6,14 @@ namespace Game
 {
     public class ShopUI
     {
-        public event Action<ShopProductData> OnBuyProduct;
+        private const string k_bodyId = "Body";
+        private const string k_buyButtonId = "BuyButton";
+        
+        public event Action<ShopProductData> OnSelectProduct;
         
         public ShopUI(VisualElement root, VisualTreeAsset listEntryTemplate, List<ShopProductData> shopProductsList)
         {
-            var listView = root.Q<ScrollView>("Body");
+            var listView = root.Q<ScrollView>(k_bodyId);
             
             foreach (ShopProductData shopProductData in shopProductsList)
             {
@@ -22,7 +25,7 @@ namespace Game
                 newListEntryLogic.SetVisualElement(newListEntry);
                 newListEntryLogic.SetProductData(shopProductData);
                 
-                var buyButton = newListEntry.Q<VisualElement>("BuyButton");
+                var buyButton = newListEntry.Q<VisualElement>(k_buyButtonId);
                 buyButton.RegisterCallback<PointerDownEvent>(e => Handle(shopProductData), TrickleDown.TrickleDown);
                 
                 listView.Add(newListEntry);
@@ -31,7 +34,7 @@ namespace Game
 
         private void Handle(ShopProductData productData)
         {
-            OnBuyProduct?.Invoke(productData);
+            OnSelectProduct?.Invoke(productData);
         }
     }
 }

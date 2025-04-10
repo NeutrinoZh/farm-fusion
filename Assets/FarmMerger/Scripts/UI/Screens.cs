@@ -126,8 +126,9 @@ namespace Game
             OnShowAdvice?.Invoke();
         }
 
-        public void ShowPurchasePopup()
+        public void ShowPurchasePopup(ShopProductData data)
         {
+            _purchasePopupUI.SetData(data);
             _purchasePopup.style.bottom = k_bottomOffsetShow;
             
             _foggingGroup.style.display = DisplayStyle.Flex;

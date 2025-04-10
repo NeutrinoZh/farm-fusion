@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b45d7333849cf740a0ffc456ba64693, type: 3}
+  m_Name: Bees
+  m_EditorClassIdentifier: 
+  objectsPrefabs:
+  - prefab: {fileID: -8105442225704821896, guid: f5829e34097bb2445bfa036721fb02e1, type: 3}
+    price: 1
+  - prefab: {fileID: -8105442225704821896, guid: 2918dbc03000fe1409e0297015345022, type: 3}
+    price: 5
+  - prefab: {fileID: -8105442225704821896, guid: 277207a6db4ff4440a52a5913081d4ee, type: 3}
+    price: 12
+  - prefab: {fileID: -8105442225704821896, guid: 196582a91a201254ca1d0faebc84581d, type: 3}
+    price: 28
+  - prefab: {fileID: -8105442225704821896, guid: 1459d7590e6c33a4abdedac6e362290f, type: 3}
+    price: 62
+  - prefab: {fileID: -8105442225704821896, guid: 4619e35f249180f40b9bc863025d7eb3, type: 3}
+    price: 135

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b45d7333849cf740a0ffc456ba64693, type: 3}
+  m_Name: Goat
+  m_EditorClassIdentifier: 
+  objectsPrefabs:
+  - prefab: {fileID: -8105442225704821896, guid: 5184acda960321d4a894f3eac3d6fca9, type: 3}
+    price: 2
+  - prefab: {fileID: -8105442225704821896, guid: 5643a5673d999a547b9016f683b974dc, type: 3}
+    price: 8
+  - prefab: {fileID: -8105442225704821896, guid: 0fc5abfcd95d96948a4fea7e1ed4908d, type: 3}
+    price: 20
+  - prefab: {fileID: -8105442225704821896, guid: 537aed220dae721488ff65a518bf10ed, type: 3}
+    price: 45
+  - prefab: {fileID: -8105442225704821896, guid: 6132e14bb9d2bf946b31bb8495b4fe00, type: 3}
+    price: 100
+  - prefab: {fileID: -8105442225704821896, guid: 51c5a93ef4e4a8c448f4a1d63a73552e, type: 3}
+    price: 220

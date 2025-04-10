@@ -10,6 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c7e8f94f09e4b7dbda5f443e733c31e, type: 3}
-  m_Name: Test 3
+  m_Name: Nest
   m_EditorClassIdentifier: 
-  <ProductTitle>k__BackingField: Test 3
+  <Id>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 21300000, guid: 9fb3cf72b7e02c5478bb4ac924f4d804, type: 3}
+  <Title>k__BackingField: Nest
+  <Description>k__BackingField: Spawns chickens from a cozy nest.
+  <Price>k__BackingField: 100

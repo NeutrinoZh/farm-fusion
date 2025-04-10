@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 1e714f8ecc32e93419d94a202fe20b67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 743733a35dc5e7e40be697c435adbb37, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _wheatCost: 14
   items:
-  - typeId: 1
+  - typeId: 4
     chanceToDrop: 0.5
-  - typeId: 2
+  - typeId: 5
     chanceToDrop: 0.5

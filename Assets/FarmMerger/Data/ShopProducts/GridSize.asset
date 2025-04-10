@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c7e8f94f09e4b7dbda5f443e733c31e, type: 3}
   m_Name: GridSize
   m_EditorClassIdentifier: 
-  <ProductId>k__BackingField: 0
-  <ProductTitle>k__BackingField: Increase grid size
+  <Id>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: e3b22639c9800db4db53c367141be216, type: 3}
+  <Title>k__BackingField: Grid Size
+  <Description>k__BackingField: 'Increase you grid size! '
+  <Price>k__BackingField: 150

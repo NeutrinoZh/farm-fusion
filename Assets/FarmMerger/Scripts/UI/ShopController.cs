@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using UnityEngine;
 using Zenject;
 
 namespace Game
@@ -12,9 +13,10 @@ namespace Game
         private GameGrid _grid;
         private ShopUI _ui;
         private Screens _screens;
+        private PurchasePopup _purchasePopup;
 
         [Inject]
-        public ShopController(Screens screens, UpgradesData upgrades, GridLevels gridLevels, ResourceManager resourceManager, GameGrid grid, ShopUI shopUI)
+        public ShopController(Screens screens, UpgradesData upgrades, GridLevels gridLevels, ResourceManager resourceManager, GameGrid grid, ShopUI shopUI, PurchasePopup purchasePopup)
         {
             _screens = screens;
             _upgrades = upgrades;
@@ -22,25 +24,63 @@ namespace Game
             _resourceManager = resourceManager;
             _grid = grid;
             _ui = shopUI;
+            _purchasePopup = purchasePopup;
 
             Initialize();
         }
 
         private void Initialize()
         {
-            _ui.OnBuyProduct += ShowPopup;
+            _ui.OnSelectProduct += ShowPopup;
+            _purchasePopup.OnPurchase += PurchaseHandle;
         }
 
         private void ShowPopup(ShopProductData product)
         {
-            _screens.ShowPurchasePopup();
+            _screens.ShowPurchasePopup(product);
         }
 
-        private void Product(ShopProductData product)
+        private void PurchaseHandle(ShopProductsEnum product)
         {
-            if (product.ProductId != 0)
-                return;
-            
+            switch (product)
+            {
+                case ShopProductsEnum.IncreaseGridSize:
+                    IncreaseGridSize();
+                    break;
+                
+                case ShopProductsEnum.Nest:
+                    SpawnObject(0);
+                    break;
+                
+                case ShopProductsEnum.Barn:
+                    SpawnObject(3);
+                    break;
+                
+                case ShopProductsEnum.Beehive:
+                    SpawnObject(6);
+                    break;
+                
+                case ShopProductsEnum.PigBarn:
+                    SpawnObject(8);
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(product), product, null);
+            }
+        }
+
+        private void SpawnObject(int type)
+        {
+            if (_grid.GetRandomPosition(out Vector2Int position))
+                _grid.AddObject(new GridObjectData
+                {
+                    type = type,
+                    position = position
+                });
+        }
+        
+        private void IncreaseGridSize()
+        {
             int nextLevel = _upgrades.gridLevel + 1;
             if (nextLevel >= _gridLevels.levels.Count)
                 return;

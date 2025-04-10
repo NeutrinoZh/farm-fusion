@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b45d7333849cf740a0ffc456ba64693, type: 3}
+  m_Name: BeesCoop
+  m_EditorClassIdentifier: 
+  objectsPrefabs:
+  - prefab: {fileID: -8105442225704821896, guid: 4dd2328169c5f8d49bf28f919782103f, type: 3}
+    price: 50
+  - prefab: {fileID: -8105442225704821896, guid: 9ae833188dcf6994caadec3d96f1960d, type: 3}
+    price: 100
+  - prefab: {fileID: -8105442225704821896, guid: d1dfb8b569d9d2242b15af119fe95177, type: 3}
+    price: 150
