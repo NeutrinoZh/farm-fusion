@@ -27,6 +27,7 @@ namespace Game
         private const string k_adviceId = "Advice";
         private const string k_foggingId = "Fogging";
         private const string k_purchasePopupId = "PurchasePopup";
+        private const string k_questsId = "SidePanel";
 
         private const int k_bottomOffsetHide = -480;
         private const int k_bottomOffsetShow = 0;
@@ -42,8 +43,10 @@ namespace Game
         private VisualElement _adviceGroup;
         private VisualElement _foggingGroup;
         private VisualElement _purchasePopup;
+        private VisualElement _questsGroup;
 
         private GridUI _gridUI;
+        private QuestsUI _questsUI;
         private TabBarUI _tabBarUI;
         private ShopUI _shopUI;
         private PurchasePopup _purchasePopupUI;
@@ -67,6 +70,7 @@ namespace Game
             _adviceGroup = root.Q<VisualElement>(k_adviceId);
             _foggingGroup = root.Q<VisualElement>(k_foggingId);
             _purchasePopup = root.Q<VisualElement>(k_purchasePopupId);
+            _questsGroup = root.Q<VisualElement>(k_questsId);
             
             _gridUI = new GridUI(this, _uiDocument, _diContainer.Resolve<ResourceManager>());
             _diContainer.Bind<GridUI>().FromInstance(_gridUI);
@@ -79,6 +83,9 @@ namespace Game
 
             _purchasePopupUI = new PurchasePopup(this, _purchasePopup);
             _diContainer.Bind<PurchasePopup>().FromInstance(_purchasePopupUI);
+
+            _questsUI = new QuestsUI(this, _questsGroup, _diContainer.Resolve<QuestManager>());
+            _diContainer.Bind<QuestsUI>().FromInstance(_questsUI);
             
             _diContainer.Bind<Screens>().FromInstance(this);
             _diContainer.Instantiate<ShopController>();

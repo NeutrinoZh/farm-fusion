@@ -10,9 +10,12 @@ namespace Game
         [SerializeField] private GridPointer _gridPointer;
         [SerializeField] private GridLevels _gridLevels;
         [SerializeField] private Env _env;
-
+        [SerializeField] private Quests _quests;
+        [SerializeField] private Tradesman _tradesman;
+        
         public override void InstallBindings()
         {
+            Container.Bind<QuestManager>().FromInstance(new QuestManager(_quests, _tradesman));
             Container.Bind<Env>().FromInstance(_env);
             Container.Bind<UpgradesData>().FromInstance(new UpgradesData()
             {
@@ -29,6 +32,9 @@ namespace Game
 
             Container.Bind<ResourceManager>().AsSingle().NonLazy();
             Container.Bind<ResourceData>().FromInstance(ResourceData.k_defaultData).WhenInjectedInto<ResourceManager>();
+            
+            Container.Bind<Tradesman>().FromInstance(_tradesman).AsSingle();
+            
         }
     }
 }

@@ -1548,11 +1548,24 @@ MonoBehaviour:
   _gridPointer: {fileID: 997055086}
   _gridLevels: {fileID: 11400000, guid: 5f747cfcf30fa684da74085a9890a277, type: 2}
   _env: {fileID: 289523716}
+  _quests: {fileID: 11400000, guid: 712d3a3d114c74d4caf7ca239339058c, type: 2}
+  _tradesman: {fileID: 2118491563}
 --- !u!4 &2118491562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5493067084159739550, guid: 42ec493982cb50f4989aeda64dc69efe, type: 3}
   m_PrefabInstance: {fileID: 6481882452350228191}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2118491563 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 701184134854171164, guid: 42ec493982cb50f4989aeda64dc69efe, type: 3}
+  m_PrefabInstance: {fileID: 6481882452350228191}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9081b19941d937447884f6752dff7f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2379329994600304111
 PrefabInstance:
   m_ObjectHideFlags: 0

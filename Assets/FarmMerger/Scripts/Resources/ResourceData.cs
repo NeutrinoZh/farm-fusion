@@ -11,7 +11,7 @@ namespace Game
         public static readonly ResourceData k_defaultData = new()
         {
             moneyCount = 0,
-            wheatCount = 1000
+            wheatCount = 200
         };
     };
 }
