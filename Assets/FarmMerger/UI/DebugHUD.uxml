@@ -2,6 +2,7 @@
     <ui:VisualElement name="Root" picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: flex-start; align-self: stretch; flex-direction: column;">
         <ui:VisualElement name="DebugButtons" picking-mode="Ignore" style="flex-grow: 1; flex-direction: column; align-items: flex-end; justify-content: center; margin-top: 4%; margin-right: 4%; margin-bottom: 4%; margin-left: 4%;">
             <ui:VisualElement name="FreeCoin" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/FarmMerger/Art/UI/Coin.png?fileID=2800000&amp;guid=dae8325c970a2224c86b466f1aca02f0&amp;type=3#Coin&quot;); width: 25px; height: 25px; max-width: 25px; max-height: 25px; min-width: 25px; min-height: 25px;" />
+            <ui:VisualElement name="FreeEnergy" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/FarmMerger/Art/UI/Energy.png?fileID=2800000&amp;guid=4e0b8023ca181274485f840c56ff5b9b&amp;type=3#Energy&quot;); width: 25px; height: 25px; max-width: 25px; max-height: 25px; min-width: 25px; min-height: 25px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

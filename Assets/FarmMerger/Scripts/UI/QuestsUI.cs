@@ -7,13 +7,15 @@ namespace Game
     {
         private const string k_iconId = "Icon";
         private const string k_counterId = "Counter";
+        private const string k_completedIconId = "CompletedIcon";
         
-        private VisualElement _questsPanel;
-        private Screens _screens;
-        private QuestManager _questManager;
+        private readonly VisualElement _questsPanel;
+        private readonly Screens _screens;
+        private readonly QuestManager _questManager;
 
-        private VisualElement _icon;
-        private Label _counter;
+        private readonly VisualElement _icon;
+        private readonly VisualElement _completedIcon;
+        private readonly Label _counter;
 
         public QuestsUI(Screens screens, VisualElement questsPanel, QuestManager questManager)
         {
@@ -21,16 +23,44 @@ namespace Game
             _questsPanel = questsPanel;
             _questManager = questManager;
             
-            _icon = questsPanel.Q<VisualElement>("Icon");
-            _counter = questsPanel.Q<Label>("Counter");
+            _icon = questsPanel.Q<VisualElement>(k_iconId);
+            _counter = questsPanel.Q<Label>(k_counterId);
+            _completedIcon = questsPanel.Q<VisualElement>(k_completedIconId);
+
+            questsPanel.RegisterCallback<PointerDownEvent>(e => HandleClick());
             
             _questManager.OnChangeQuest += HandleQuest;
             _questManager.OnQuestProgress += HandleProgress;
+            _questManager.OnQuestCompleted += HandleCompleteQuest;
             _questManager.NextQuest();
+        }
+
+        ~QuestsUI()
+        {
+            _questManager.OnChangeQuest -= HandleQuest;
+            _questManager.OnQuestProgress -= HandleProgress;
+            _questManager.OnQuestCompleted -= HandleCompleteQuest;
+            
+            _questsPanel.UnregisterCallback<PointerDownEvent>(e => HandleClick());
+        }
+
+        private void HandleClick()
+        {
+            if (_questManager.IsQuestComplete)
+                _screens.ShowRewardPopup(_questManager.CurrentQuest.Award);
+        }
+        
+        private void HandleCompleteQuest()
+        {
+            _counter.style.visibility = Visibility.Hidden;
+            _completedIcon.style.visibility = Visibility.Visible;
         }
 
         private void HandleQuest(Quest quest)
         {
+            _counter.style.visibility = Visibility.Visible;
+            _completedIcon.style.visibility = Visibility.Hidden;
+            
             var background = _icon.style.backgroundImage.value;
             background.sprite = quest.Icon;
             _icon.style.backgroundImage = background;

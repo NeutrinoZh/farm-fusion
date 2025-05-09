@@ -4,28 +4,29 @@ namespace Game
 {
     public class QuestManager
     {
-        private Quests _quests;
-        private Quest _currentQuest;
-        private int _currentQuestIndex = -1;
-        private int _currentQuestProgress;
-        
-        private Tradesman _tradesman;
-        
-        public Quest CurrentQuest => _currentQuest;
+        private readonly Quests _quests;
+        private readonly Tradesman _tradesman;
 
-        public int CurrentQuestProgress
+        private int _currentQuestProgress;
+        private int _currentQuestIndex = -1;
+        
+        public Quest CurrentQuest { get; private set; }
+        public bool IsQuestComplete { get; private set; }
+
+        private int CurrentQuestProgress
         {
             get => _currentQuestProgress;
             set
             {
                 _currentQuestProgress = value;
-                OnQuestProgress?.Invoke(_currentQuest, value);
+                OnQuestProgress?.Invoke(CurrentQuest, value);
             }
         }
 
         public event Action<Quest> OnChangeQuest;
         public event Action<Quest, int> OnQuestProgress;
-
+        public event Action OnQuestCompleted;
+        
         public QuestManager(Quests quests, Tradesman tradesman)
         {
             _quests = quests;
@@ -41,25 +42,32 @@ namespace Game
         
         public void NextQuest()
         {
+            IsQuestComplete = false;
             CurrentQuestProgress = 0;
-            _currentQuest = ++_currentQuestIndex >= _quests.Qs.Count ? GenerateRandomQuest() : _quests.Qs[_currentQuestIndex];
-            OnChangeQuest?.Invoke(_currentQuest);
+            CurrentQuest = ++_currentQuestIndex >= _quests.Qs.Count ? GenerateRandomQuest() : _quests.Qs[_currentQuestIndex];
+            OnChangeQuest?.Invoke(CurrentQuest);
         }
 
         private void HandleProgress(GridObject gridObject)
         {
+            if (IsQuestComplete)
+                return;
+            
             if (
                 gridObject.Data.type != CurrentQuest.RequestedWareType ||
                 gridObject.Data.level != CurrentQuest.RequestedWareLevel
             )
                 return;
             
-            int nextLevel = CurrentQuestProgress + 1;
-            
-            if (nextLevel >= CurrentQuest.Quantity)
-                NextQuest();
+            int nextProgress = CurrentQuestProgress + 1;
+
+            if (nextProgress >= CurrentQuest.Quantity)
+            {
+                IsQuestComplete = true;
+                OnQuestCompleted?.Invoke();
+            }
             else 
-                CurrentQuestProgress = nextLevel;
+                CurrentQuestProgress = nextProgress;
         }
 
         private Quest GenerateRandomQuest()

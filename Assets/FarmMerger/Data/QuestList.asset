@@ -22,9 +22,54 @@ MonoBehaviour:
     <RequestedWareType>k__BackingField: 1
     <RequestedWareLevel>k__BackingField: 2
     <Quantity>k__BackingField: 1
-    <Award>k__BackingField: 50
+    <Award>k__BackingField: 60
   - <Icon>k__BackingField: {fileID: 21300000, guid: 0f17bf6dead2575448825892fde57cd1, type: 3}
     <RequestedWareType>k__BackingField: 1
     <RequestedWareLevel>k__BackingField: 1
     <Quantity>k__BackingField: 3
     <Award>k__BackingField: 80
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 8a129d498ae32da4e998c300822d25db, type: 3}
+    <RequestedWareType>k__BackingField: 1
+    <RequestedWareLevel>k__BackingField: 3
+    <Quantity>k__BackingField: 2
+    <Award>k__BackingField: 90
+  - <Icon>k__BackingField: {fileID: 21300000, guid: ba1f9af64118be54abb11dbd0e5ecfca, type: 3}
+    <RequestedWareType>k__BackingField: 1
+    <RequestedWareLevel>k__BackingField: 2
+    <Quantity>k__BackingField: 4
+    <Award>k__BackingField: 110
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 3fb3c3ed46598094da57556c8753ef7a, type: 3}
+    <RequestedWareType>k__BackingField: 2
+    <RequestedWareLevel>k__BackingField: 0
+    <Quantity>k__BackingField: 3
+    <Award>k__BackingField: 120
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 8dc7827878a757d45b1782dd2161bbb0, type: 3}
+    <RequestedWareType>k__BackingField: 2
+    <RequestedWareLevel>k__BackingField: 2
+    <Quantity>k__BackingField: 1
+    <Award>k__BackingField: 130
+  - <Icon>k__BackingField: {fileID: 21300000, guid: e915bf75695013b449b56662cdb11ad0, type: 3}
+    <RequestedWareType>k__BackingField: 1
+    <RequestedWareLevel>k__BackingField: 5
+    <Quantity>k__BackingField: 1
+    <Award>k__BackingField: 145
+  - <Icon>k__BackingField: {fileID: 21300000, guid: d525081fbf336e14899db98622bd13f8, type: 3}
+    <RequestedWareType>k__BackingField: 1
+    <RequestedWareLevel>k__BackingField: 4
+    <Quantity>k__BackingField: 3
+    <Award>k__BackingField: 150
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 235bdce701f0d5142b5c4f6f982f9a95, type: 3}
+    <RequestedWareType>k__BackingField: 2
+    <RequestedWareLevel>k__BackingField: 1
+    <Quantity>k__BackingField: 5
+    <Award>k__BackingField: 160
+  - <Icon>k__BackingField: {fileID: 21300000, guid: ad4359b7e1c886a40aafa60406f0f77f, type: 3}
+    <RequestedWareType>k__BackingField: 4
+    <RequestedWareLevel>k__BackingField: 0
+    <Quantity>k__BackingField: 4
+    <Award>k__BackingField: 170
+  - <Icon>k__BackingField: {fileID: 21300000, guid: ab8d296070ed7ca4492dd0cbfe12b65f, type: 3}
+    <RequestedWareType>k__BackingField: 2
+    <RequestedWareLevel>k__BackingField: 3
+    <Quantity>k__BackingField: 7
+    <Award>k__BackingField: 180

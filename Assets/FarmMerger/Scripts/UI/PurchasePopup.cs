@@ -31,14 +31,14 @@ namespace Game
         private readonly Color k_normalTextColor = new(0.314f, 0.212f, 0.6f);
         private readonly Color k_disabledTextColor = new(0.8f, 0.6f, 0.6f);
         
-        private Screens _screens;
+        private readonly Screens _screens;
 
-        private VisualElement _icon;
-        private Label _title;
-        private Label _description;
-        private Label _price;
-        private Label _purchaseLabel;
-        private VisualElement _purchaseButton;
+        private readonly VisualElement _icon;
+        private readonly Label _title;
+        private readonly Label _description;
+        private readonly Label _price;
+        private readonly Label _purchaseLabel;
+        private readonly VisualElement _purchaseButton;
 
         private ShopProductData _product;
         private PopUpType _type;
