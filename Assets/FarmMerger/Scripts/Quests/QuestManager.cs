@@ -1,4 +1,6 @@
 ﻿using System;
+using UnityEngine;
+using Random = System.Random;
 
 namespace Game
 {
@@ -13,12 +15,29 @@ namespace Game
         public Quest CurrentQuest { get; private set; }
         public bool IsQuestComplete { get; private set; }
 
-        private int CurrentQuestProgress
+        public int CurrentQuestIndex
+        {
+            get => _currentQuestIndex;
+            set
+            {
+                _currentQuestIndex = value - 1;
+                NextQuest();
+            }
+        }
+        
+        public int CurrentQuestProgress
         {
             get => _currentQuestProgress;
             set
             {
                 _currentQuestProgress = value;
+            
+                if (_currentQuestProgress >= CurrentQuest.Quantity)
+                {
+                    IsQuestComplete = true;
+                    OnQuestCompleted?.Invoke();
+                }
+                
                 OnQuestProgress?.Invoke(CurrentQuest, value);
             }
         }
@@ -59,15 +78,7 @@ namespace Game
             )
                 return;
             
-            int nextProgress = CurrentQuestProgress + 1;
-
-            if (nextProgress >= CurrentQuest.Quantity)
-            {
-                IsQuestComplete = true;
-                OnQuestCompleted?.Invoke();
-            }
-            else 
-                CurrentQuestProgress = nextProgress;
+            CurrentQuestProgress += 1;
         }
 
         private Quest GenerateRandomQuest()

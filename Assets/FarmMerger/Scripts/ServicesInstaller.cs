@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using Zenject;
 using UnityEngine;
 
@@ -34,7 +36,8 @@ namespace Game
             Container.Bind<ResourceData>().FromInstance(ResourceData.k_defaultData).WhenInjectedInto<ResourceManager>();
             
             Container.Bind<Tradesman>().FromInstance(_tradesman).AsSingle();
-            
+
+            Container.Instantiate<LoaderGameGrid>();
         }
     }
 }

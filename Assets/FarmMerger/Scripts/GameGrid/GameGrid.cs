@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 using Zenject.SpaceFighter;
@@ -11,7 +12,8 @@ namespace Game
         public Action OnResize;
 
         public Vector2Int Size => _data.size;
-
+        public GridData Data => _data;
+        
         private const string k_Background = "Background";
         private const string k_EnvBackground = "Background";
 
@@ -41,10 +43,10 @@ namespace Game
             _objectInstances = new();
             _nextIndex = 0;
             _diContainer = container;
-
+            
             Resize(_data.size);
         }
-
+        
         public GridObject AddObject(GridObjectData objectData)
         {
             objectData.index = _nextIndex++;

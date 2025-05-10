@@ -32,7 +32,12 @@ namespace Game
             _questManager.OnChangeQuest += HandleQuest;
             _questManager.OnQuestProgress += HandleProgress;
             _questManager.OnQuestCompleted += HandleCompleteQuest;
-            _questManager.NextQuest();
+            
+            HandleQuest(_questManager.CurrentQuest);
+            HandleProgress(_questManager.CurrentQuest, _questManager.CurrentQuestProgress);
+            
+            if (_questManager.IsQuestComplete)
+                HandleCompleteQuest();
         }
 
         ~QuestsUI()

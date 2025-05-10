@@ -10,29 +10,29 @@ namespace Game
         public event Action OnMoneyChange;
         public event Action OnWheatChange;
 
-        private ResourceData _data;
+        public ResourceData Data;
 
         public ResourceManager(ResourceData data)
         {
-            _data = data;
+            Data = data;
         }
 
         public int Money
         {
-            get => _data.moneyCount;
+            get => Data.moneyCount;
             set
             {
-                _data.moneyCount = value;
+                Data.moneyCount = value;
                 OnMoneyChange?.Invoke();
             }
         }
 
         public int Wheat
         {
-            get => _data.wheatCount;
+            get => Data.wheatCount;
             set
             {
-                _data.wheatCount = value;
+                Data.wheatCount = value;
                 OnWheatChange?.Invoke();
             }
         }
