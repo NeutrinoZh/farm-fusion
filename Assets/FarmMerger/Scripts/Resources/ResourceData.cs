@@ -6,7 +6,7 @@ namespace Game
     public struct ResourceData
     {
         public int moneyCount;
-        public int wheatCount;
+        public float wheatCount;
 
         public static readonly ResourceData k_defaultData = new()
         {

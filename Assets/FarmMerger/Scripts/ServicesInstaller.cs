@@ -14,9 +14,13 @@ namespace Game
         [SerializeField] private Env _env;
         [SerializeField] private Quests _quests;
         [SerializeField] private Tradesman _tradesman;
+        [SerializeField] private LifeController _lifeController;
+        
+        private SaveController _saveController;
         
         public override void InstallBindings()
         {
+            Container.Bind<LifeController>().FromInstance(_lifeController).AsSingle();
             Container.Bind<QuestManager>().FromInstance(new QuestManager(_quests, _tradesman));
             Container.Bind<Env>().FromInstance(_env);
             Container.Bind<UpgradesData>().FromInstance(new UpgradesData()
@@ -36,8 +40,10 @@ namespace Game
             Container.Bind<ResourceData>().FromInstance(ResourceData.k_defaultData).WhenInjectedInto<ResourceManager>();
             
             Container.Bind<Tradesman>().FromInstance(_tradesman).AsSingle();
-
-            Container.Instantiate<LoaderGameGrid>();
+            
+            _saveController = Container.Instantiate<SaveController>();
         }
+
+       
     }
 }

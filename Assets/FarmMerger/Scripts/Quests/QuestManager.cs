@@ -61,8 +61,8 @@ namespace Game
         
         public void NextQuest()
         {
-            IsQuestComplete = false;
             CurrentQuestProgress = 0;
+            IsQuestComplete = false;
             CurrentQuest = ++_currentQuestIndex >= _quests.Qs.Count ? GenerateRandomQuest() : _quests.Qs[_currentQuestIndex];
             OnChangeQuest?.Invoke(CurrentQuest);
         }

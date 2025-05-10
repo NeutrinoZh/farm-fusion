@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game
 {
-    public class LoaderGameGrid
+    public class SaveController
     {
         private static string SavePath => Path.Combine(Application.persistentDataPath, "save.json");
         
         private readonly ResourceManager _resourceManager;
         private readonly GameGrid _gameGrid;
         private readonly QuestManager _questManager;
+        private readonly LifeController _lifeController;
         
         [Serializable]
         private struct GameData
@@ -23,24 +23,28 @@ namespace Game
             
             public int CurrentQuestIndex;
             public int CurrentQuestProgress;
+            public DateTime CloseTime;
         }
         
-        public LoaderGameGrid(GameGrid gameGrid, ResourceManager resourceManager, QuestManager questManager)
+        public SaveController(LifeController lifeController, GameGrid gameGrid, ResourceManager resourceManager, QuestManager questManager)
         {
+            _lifeController = lifeController;
             _gameGrid = gameGrid;
             _resourceManager = resourceManager;
             _questManager = questManager;
             
-            Application.quitting += OnQuit;
-
             Load();
+
+            lifeController.OnQuit += Save;
+            lifeController.OnPause += Save;
         }
 
-        ~LoaderGameGrid()
+        ~SaveController()
         {
-            Application.quitting -= OnQuit;
+            _lifeController.OnQuit -= Save;
+            _lifeController.OnPause -= Save;
         }
-
+        
         private void Load()
         {
             GameData gameData = new()
@@ -48,7 +52,8 @@ namespace Game
                 Grid = GridData.k_defaultData,
                 Resource = ResourceData.k_defaultData,
                 CurrentQuestIndex = 0,
-                CurrentQuestProgress = 0
+                CurrentQuestProgress = 0,
+                CloseTime = DateTime.Now
             };
             
             List<GridObjectData> objects = new();
@@ -65,15 +70,18 @@ namespace Game
                _gameGrid.AddObject(new GridObjectData { type = 0, position = position });
             }
             
+            _gameGrid.Resize(gameData.Grid.size);
+            
             foreach (var obj in objects)
                 _gameGrid.AddObject(obj);
 
             _resourceManager.Data = gameData.Resource;
             _questManager.CurrentQuestIndex = gameData.CurrentQuestIndex;
             _questManager.CurrentQuestProgress = gameData.CurrentQuestProgress;
+            _resourceManager.HandleLaunch(gameData.CloseTime);
         }
 
-        private void OnQuit()
+        private void Save()
         {
         #if UNITY_EDITOR
             bool prettyPrint = true;
@@ -87,7 +95,8 @@ namespace Game
                 Grid = _gameGrid.Data,
                 Resource = _resourceManager.Data,
                 CurrentQuestIndex = _questManager.CurrentQuestIndex,
-                CurrentQuestProgress = _questManager.CurrentQuestProgress
+                CurrentQuestProgress = _questManager.CurrentQuestProgress,
+                CloseTime = DateTime.Now
             }, prettyPrint);
             
             File.WriteAllText(SavePath, json);

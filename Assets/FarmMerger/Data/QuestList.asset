@@ -71,5 +71,80 @@ MonoBehaviour:
   - <Icon>k__BackingField: {fileID: 21300000, guid: ab8d296070ed7ca4492dd0cbfe12b65f, type: 3}
     <RequestedWareType>k__BackingField: 2
     <RequestedWareLevel>k__BackingField: 3
-    <Quantity>k__BackingField: 7
+    <Quantity>k__BackingField: 5
     <Award>k__BackingField: 180
+  - <Icon>k__BackingField: {fileID: 21300000, guid: dc7990bd5b6e0654399973fe043ef7a9, type: 3}
+    <RequestedWareType>k__BackingField: 4
+    <RequestedWareLevel>k__BackingField: 2
+    <Quantity>k__BackingField: 6
+    <Award>k__BackingField: 200
+  - <Icon>k__BackingField: {fileID: 21300000, guid: d525081fbf336e14899db98622bd13f8, type: 3}
+    <RequestedWareType>k__BackingField: 1
+    <RequestedWareLevel>k__BackingField: 4
+    <Quantity>k__BackingField: 10
+    <Award>k__BackingField: 210
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 6b5072c76f925974389d77ce949b058e, type: 3}
+    <RequestedWareType>k__BackingField: 4
+    <RequestedWareLevel>k__BackingField: 1
+    <Quantity>k__BackingField: 8
+    <Award>k__BackingField: 220
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 0ebb0c49542065540a4894d7e2ef3f7a, type: 3}
+    <RequestedWareType>k__BackingField: 5
+    <RequestedWareLevel>k__BackingField: 0
+    <Quantity>k__BackingField: 3
+    <Award>k__BackingField: 230
+  - <Icon>k__BackingField: {fileID: 21300000, guid: ae1ea7507d6605d489a78329a4e80611, type: 3}
+    <RequestedWareType>k__BackingField: 4
+    <RequestedWareLevel>k__BackingField: 4
+    <Quantity>k__BackingField: 7
+    <Award>k__BackingField: 240
+  - <Icon>k__BackingField: {fileID: 21300000, guid: f34155829841ffc448e4da5fdb9b14a5, type: 3}
+    <RequestedWareType>k__BackingField: 2
+    <RequestedWareLevel>k__BackingField: 5
+    <Quantity>k__BackingField: 6
+    <Award>k__BackingField: 250
+  - <Icon>k__BackingField: {fileID: 21300000, guid: dc7990bd5b6e0654399973fe043ef7a9, type: 3}
+    <RequestedWareType>k__BackingField: 4
+    <RequestedWareLevel>k__BackingField: 2
+    <Quantity>k__BackingField: 5
+    <Award>k__BackingField: 260
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 07b05f6835ce56c46bf2f8c395982e49, type: 3}
+    <RequestedWareType>k__BackingField: 5
+    <RequestedWareLevel>k__BackingField: 0
+    <Quantity>k__BackingField: 5
+    <Award>k__BackingField: 270
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 7bc54dccbe7fc5c48ada1866e5276a9f, type: 3}
+    <RequestedWareType>k__BackingField: 7
+    <RequestedWareLevel>k__BackingField: 1
+    <Quantity>k__BackingField: 4
+    <Award>k__BackingField: 280
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 2934b1ae85ce28d418422d93a7870ecc, type: 3}
+    <RequestedWareType>k__BackingField: 4
+    <RequestedWareLevel>k__BackingField: 5
+    <Quantity>k__BackingField: 3
+    <Award>k__BackingField: 290
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 8d3284cb94c103340a6e50c9b45495e5, type: 3}
+    <RequestedWareType>k__BackingField: 5
+    <RequestedWareLevel>k__BackingField: 5
+    <Quantity>k__BackingField: 2
+    <Award>k__BackingField: 300
+  - <Icon>k__BackingField: {fileID: 21300000, guid: c5757d03687fb024b8132ea424dc067d, type: 3}
+    <RequestedWareType>k__BackingField: 7
+    <RequestedWareLevel>k__BackingField: 3
+    <Quantity>k__BackingField: 5
+    <Award>k__BackingField: 310
+  - <Icon>k__BackingField: {fileID: 21300000, guid: a52d17decd6ece947a4005d1f3dde4b8, type: 3}
+    <RequestedWareType>k__BackingField: 7
+    <RequestedWareLevel>k__BackingField: 5
+    <Quantity>k__BackingField: 3
+    <Award>k__BackingField: 330
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 6b5072c76f925974389d77ce949b058e, type: 3}
+    <RequestedWareType>k__BackingField: 4
+    <RequestedWareLevel>k__BackingField: 1
+    <Quantity>k__BackingField: 10
+    <Award>k__BackingField: 340
+  - <Icon>k__BackingField: {fileID: 21300000, guid: 07b05f6835ce56c46bf2f8c395982e49, type: 3}
+    <RequestedWareType>k__BackingField: 5
+    <RequestedWareLevel>k__BackingField: 2
+    <Quantity>k__BackingField: 8
+    <Award>k__BackingField: 350

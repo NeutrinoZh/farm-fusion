@@ -581,6 +581,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9143584284704987504, guid: c971f3659bc9b19489bfd1798d15f553, type: 3}
   m_PrefabInstance: {fileID: 2379329994600304111}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &785106069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 785106070}
+  - component: {fileID: 785106071}
+  m_Layer: 0
+  m_Name: LifeController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &785106070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785106069}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2079462643}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &785106071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785106069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1bc6907a414fb48af3675e472964a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &796973645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,7 +1572,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 785106070}
   m_Father: {fileID: 2021748810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2079462644
@@ -1550,6 +1595,7 @@ MonoBehaviour:
   _env: {fileID: 289523716}
   _quests: {fileID: 11400000, guid: 712d3a3d114c74d4caf7ca239339058c, type: 2}
   _tradesman: {fileID: 2118491563}
+  _lifeController: {fileID: 785106071}
 --- !u!4 &2118491562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5493067084159739550, guid: 42ec493982cb50f4989aeda64dc69efe, type: 3}
