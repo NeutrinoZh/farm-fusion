@@ -11,7 +11,7 @@ namespace Game
     {
         public Action OnResize;
 
-        public Vector2Int Size => _data.size;
+        public Vector2Int Size => _gridSize;
         public GridData Data => _data;
         
         private const string k_Background = "Background";
@@ -19,6 +19,8 @@ namespace Game
 
         private GridData _data;
         private GridPrefabs _prefabs;
+        private UpgradesManager _upgradesManager;
+        private GridLevels _gridLevels;
 
         private Dictionary<int, GridObject> _objectInstances;
         private int _nextIndex;
@@ -32,19 +34,22 @@ namespace Game
         private float _oddYOffset;
         private float _oddXOffset;
 
-        public GameGrid(Env env, GridData data, GridPrefabs prefabs, Transform transform, DiContainer container)
+        private Vector2Int _gridSize;
+        
+        public GameGrid(Env env, GridData data, GridLevels gridLevels, UpgradesManager upgradesManager, GridPrefabs prefabs, Transform transform, DiContainer container)
         {
             _env = env;
             _data = data;
             _prefabs = prefabs;
+            _diContainer = container;
+            _upgradesManager = upgradesManager;
+            _gridLevels = gridLevels;
+            
             _transform = transform;
             _renderer = transform.Find(k_Background).GetComponent<SpriteRenderer>();
             _collider = transform.GetComponent<BoxCollider2D>();
             _objectInstances = new();
             _nextIndex = 0;
-            _diContainer = container;
-            
-            Resize(_data.size);
         }
         
         public GridObject AddObject(GridObjectData objectData)
@@ -65,17 +70,14 @@ namespace Game
             return instance;
         }
 
-        public void Resize(Vector2Int size)
+        public void Resize(Vector2Int size, Vector3 backgroundPosition)
         {
-            _transform.localScale = new Vector3(
-                (float)GridData.k_defaultData.size.x / size.x,
-                (float)GridData.k_defaultData.size.x / size.x,
-                1
-            );
+            float scale = (float)_gridLevels.levels[0].size.x / size.x;
+            _transform.localScale = new Vector3(scale, scale, 1);
 
+            _gridSize = size;
             _renderer.size = size;
             _collider.size = size;
-            _data.size = size;
 
             bool isXOdd = size.x % 2 == 0;
             bool isYOdd = size.y % 2 == 0;
@@ -87,16 +89,8 @@ namespace Game
                 size.x * 2,
                 size.y * 3f
             );
-            _env.Background.transform.localScale = new Vector3(
-                (float)GridData.k_defaultData.size.x / size.x,
-                (float)GridData.k_defaultData.size.x / size.x,
-                1
-            );
-            _env.Background.transform.position = new Vector3(
-                isXOdd ? 0f : 0.5f,
-                isYOdd ? 0.35f : -0.15f,
-                0
-            );
+            _env.Background.transform.localScale = new Vector3(scale, scale, 1);
+            _env.Background.transform.localPosition = backgroundPosition;
 
             OnResize?.Invoke();
         }
@@ -145,7 +139,6 @@ namespace Game
             position = new Vector2Int();
 
             int countFreeCells = Size.x * Size.y - _objectInstances.Count;
-
             if (countFreeCells == 0)
                 return false;
 
@@ -185,7 +178,9 @@ namespace Game
 
         public void Merge(GridObject lhs, GridObject rhs)
         {
-            if (!_objectInstances.ContainsKey(lhs.Index) || !_objectInstances.ContainsKey(rhs.Index))
+            if (
+                !_objectInstances.ContainsKey(lhs.Index) ||
+                !_objectInstances.ContainsKey(rhs.Index))
                 return;
 
             if (lhs.Type != rhs.Type)

@@ -51,6 +51,7 @@ namespace Game
         private QuestsUI _questsUI;
         private TabBarUI _tabBarUI;
         private ShopUI _shopUI;
+        private AchievementUI _achievementUI;
         private PurchasePopup _purchasePopupUI;
         private RewardPopup _rewardPopupUI;
         
@@ -93,6 +94,8 @@ namespace Game
 
             _rewardPopupUI = new RewardPopup(this, _rewardPopup);
             _diContainer.Bind<RewardPopup>().FromInstance(_rewardPopupUI);
+
+            _achievementUI = new AchievementUI(this, _achievementGroup);
             
             _diContainer.Bind<Screens>().FromInstance(this);
             _diContainer.Instantiate<ShopController>();

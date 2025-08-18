@@ -21,7 +21,10 @@ namespace Game
                 value => transform.localScale = value,
                 _initScale * 1.05f,
                 1
-            ).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);  
+            )
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.Linear)
+                .SetLink(gameObject);  
             
             transform.rotation = Quaternion.Euler(0, 0, 8);
             DOTween.To(
@@ -29,7 +32,11 @@ namespace Game
                 value => transform.rotation = Quaternion.Euler(0, 0, value),
                 -8,
                 1
-            ).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);  
+            )
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.Linear)
+                .SetLink(gameObject);;  
         }
+        
     }
 }

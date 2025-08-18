@@ -11,6 +11,7 @@ namespace Game
         public struct GridLevel
         {
             public Vector2Int size;
+            public Vector3 backgroundPosition;
             public int price;
         }
 

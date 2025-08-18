@@ -23,10 +23,7 @@ namespace Game
             Container.Bind<LifeController>().FromInstance(_lifeController).AsSingle();
             Container.Bind<QuestManager>().FromInstance(new QuestManager(_quests, _tradesman));
             Container.Bind<Env>().FromInstance(_env);
-            Container.Bind<UpgradesData>().FromInstance(new UpgradesData()
-            {
-                gridLevel = 0
-            }).NonLazy();
+            Container.Bind<UpgradesManager>().FromInstance(new UpgradesManager(UpgradesData.k_defaultData));
 
             Container.Bind<GridPrefabs>().FromInstance(_gridPrefabs);
 

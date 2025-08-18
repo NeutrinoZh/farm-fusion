@@ -36,23 +36,95 @@
     
     width: 105%;
     align-self: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .float_panel #PopUp #Header {
     flex-grow: 1;
     
-    max-height: 10%;
-    height: 20px;
+    width: 95%;
+    max-height: 40px;
     
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+.float_panel #PopUp #Header .tab {
+    background-color: #FDF3FF;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
     
-    display: none;
+    border-width: 0px;
+    border-bottom-width: 3px;
+    border-color: rgb(82, 207, 255);
+    
+    width: 50%;
+    height: 100%;
+    
+    position: relative;
+    top: 5px;
+}
+
+.float_panel #PopUp #Header .tab.active {
+    border-width: 3px;
+    border-bottom-width: 0px;
+}
+
+.float_panel #PopUp #Header .tab Label {
+    font-size: 15px;
+    -unity-text-align: middle-center;
+}
+
+.float_panel #PopUp #Header .tab .shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+    background-color: rgba(99, 99, 99, 0.47);
+    
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    
+    visibility: visible;
+}
+
+.float_panel #PopUp #Header .tab.active .shadow {
+    visibility: hidden;
+}
+
+.float_panel #PopUp #Body .section {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+}
+
+.float_panel #PopUp #Body .section .achievement {
+    padding: 5%;
+    margin: 2% 0%;
+    width: 100%;
+    height: auto;
+    
+    border-color: rgb(197, 196, 186);
+    border-bottom-width: 3px;
+}
+
+.float_panel #PopUp #Body .section .content {
+    display: flex;
+    flex-direction: row;
 }
 
 .float_panel #PopUp #Body {
     flex-grow: 1; 
+    
+    width: 100%;
     
     align-items: center;
     justify-content: flex-start;
@@ -62,10 +134,8 @@
     border-bottom-right-radius: 0; 
     border-bottom-left-radius: 0; 
     
-    border-left-color: rgb(82, 207, 255);
-    border-right-color: rgb(82, 207, 255);
-    border-top-color: rgb(82, 207, 255);
-    border-bottom-color: rgb(82, 207, 255); 
+    border-color: rgb(82, 207, 255);
+    
     border-top-width: 3px; 
     border-right-width: 3px;
     border-bottom-width: 0;

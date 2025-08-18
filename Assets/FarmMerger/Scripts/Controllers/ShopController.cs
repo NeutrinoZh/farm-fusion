@@ -7,7 +7,7 @@ namespace Game
 {
     public class ShopController
     {
-        private UpgradesData _upgrades;
+        private UpgradesManager _upgradesManager;
         private ResourceManager _resourceManager;
         private GridLevels _gridLevels;
         private GameGrid _grid;
@@ -16,10 +16,10 @@ namespace Game
         private PurchasePopup _purchasePopup;
 
         [Inject]
-        public ShopController(Screens screens, UpgradesData upgrades, GridLevels gridLevels, ResourceManager resourceManager, GameGrid grid, ShopUI shopUI, PurchasePopup purchasePopup)
+        public ShopController(Screens screens, UpgradesManager upgradesManager, GridLevels gridLevels, ResourceManager resourceManager, GameGrid grid, ShopUI shopUI, PurchasePopup purchasePopup)
         {
             _screens = screens;
-            _upgrades = upgrades;
+            _upgradesManager = upgradesManager;
             _gridLevels = gridLevels;
             _resourceManager = resourceManager;
             _grid = grid;
@@ -94,14 +94,14 @@ namespace Game
         
         private void IncreaseGridSize()
         {
-            int nextLevel = _upgrades.gridLevel + 1;
+            int nextLevel = _upgradesManager.Data.gridLevel + 1;
             if (nextLevel >= _gridLevels.levels.Count)
                 return;
 
             var level = _gridLevels.levels[nextLevel];
             
-            _upgrades.gridLevel = nextLevel;
-            _grid.Resize(level.size);
+            _upgradesManager.Data.gridLevel = nextLevel;
+            _grid.Resize(level.size, level.backgroundPosition);
         }
     }
 }

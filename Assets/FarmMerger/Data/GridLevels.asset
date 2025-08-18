@@ -14,16 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - size: {x: 3, y: 4}
+    backgroundPosition: {x: -0.5, y: -1.15, z: 0}
     price: 0
   - size: {x: 3, y: 5}
+    backgroundPosition: {x: -0.5, y: -1.15, z: 0}
     price: 100
   - size: {x: 4, y: 5}
+    backgroundPosition: {x: 0, y: 0.35, z: 0}
     price: 100
   - size: {x: 4, y: 6}
+    backgroundPosition: {x: 0, y: 0.35, z: 0}
     price: 100
   - size: {x: 5, y: 6}
+    backgroundPosition: {x: -0.3, y: -0.55, z: 0}
     price: 100
   - size: {x: 5, y: 7}
+    backgroundPosition: {x: 0.3, y: -1.15, z: 0}
     price: 100
-  - size: {x: 6, y: 7}
+  - size: {x: 6, y: 10}
+    backgroundPosition: {x: 0, y: -0.65, z: 0}
     price: 100

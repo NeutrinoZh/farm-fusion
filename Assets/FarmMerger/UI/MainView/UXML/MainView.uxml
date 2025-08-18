@@ -3,7 +3,7 @@
     <ui:VisualElement name="Root" picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: flex-start; align-self: stretch; flex-direction: column;">
         <ui:VisualElement name="HUD" picking-mode="Ignore" style="flex-grow: 1; position: absolute; width: 100%; height: 100%;">
             <ui:VisualElement name="Margin" style="flex-grow: 1; max-height: 5%; min-height: 5%; height: 5%; background-color: rgb(0, 0, 0);" />
-            <ui:VisualElement name="TopPanel" style="flex-grow: 1; height: 10%; background-color: rgba(88, 86, 86, 0); max-height: 10%; min-height: 10%; margin-top: 0; padding-top: 0; margin-right: 0; margin-left: 0; padding-right: 0; padding-left: 0;">
+            <ui:VisualElement name="TopPanel" style="flex-grow: 1; height: 7%; background-color: rgba(88, 86, 86, 0); max-height: 7%; min-height: 7%; margin-top: 0; padding-top: 0; margin-right: 0; margin-left: 0; padding-right: 0; padding-left: 0;">
                 <ui:VisualElement name="Resources" style="flex-grow: 1; position: relative; width: 90%; max-width: 90%; min-width: 80%; align-self: center; justify-content: space-between; flex-direction: row; align-items: stretch;">
                     <ui:VisualElement name="Money" style="flex-grow: 1; justify-content: flex-start; background-image: url(&quot;project://database/Assets/FarmMerger/Art/UI/MoneyBox.png?fileID=21300000&amp;guid=c3876503259cc78499eb871e5c0b06fa&amp;type=3#MoneyBox&quot;); width: 90px; height: 30px; position: relative; flex-direction: row; align-self: center; align-items: center; max-width: 90px; min-width: 90px; max-height: 30px; min-height: 30px;">
                         <ui:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/FarmMerger/Art/UI/Coin.png?fileID=2800000&amp;guid=dae8325c970a2224c86b466f1aca02f0&amp;type=3#Coin&quot;); width: 20px; height: 16px; min-width: 20px; min-height: 16px; max-width: 20px; max-height: 16px; margin-left: 6%;" />
@@ -32,9 +32,21 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Achievements" class="float_panel" style="flex-grow: 1; bottom: -600px;">
-            <ui:VisualElement name="PopUp" style="flex-grow: 1;">
-                <ui:VisualElement name="Header" style="flex-grow: 1;" />
-                <ui:VisualElement name="Body" style="flex-grow: 1;" />
+            <ui:VisualElement name="PopUp" style="flex-grow: 1; margin-top: 30%; flex-direction: column-reverse;">
+                <ui:VisualElement name="Body" style="flex-grow: 1; border-top-left-radius: 5%; border-top-right-radius: 5%; border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-width: 0;">
+                    <ui:ScrollView name="NewList" class="section" style="display: none;" />
+                    <ui:ScrollView name="CompletedList" class="section" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Header" style="flex-grow: 1;">
+                    <ui:VisualElement name="NewTab" class="tab" style="flex-grow: 1;">
+                        <ui:VisualElement name="Shadow" class="shadow" style="flex-grow: 1;" />
+                        <ui:Label tabindex="-1" text="New" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="-unity-font-definition: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo%20SDF%201.asset?fileID=11400000&amp;guid=18300946a00016f48a6b7e443d4fef04&amp;type=2#chickenwonder-vnaqo SDF 1&quot;); -unity-font: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo.ttf?fileID=12800000&amp;guid=e0a68f7e2dd943243b00ffddd03bbc35&amp;type=3#chickenwonder-vnaqo&quot;);" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="CompletedTab" class="tab active" style="flex-grow: 1;">
+                        <ui:VisualElement name="Shadow" class="shadow" style="flex-grow: 1;" />
+                        <ui:Label tabindex="-1" text="Completed" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo.ttf?fileID=12800000&amp;guid=e0a68f7e2dd943243b00ffddd03bbc35&amp;type=3#chickenwonder-vnaqo&quot;); -unity-font-definition: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo%20SDF%201.asset?fileID=11400000&amp;guid=18300946a00016f48a6b7e443d4fef04&amp;type=2#chickenwonder-vnaqo SDF 1&quot;);" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Map" class="float_panel" style="flex-grow: 1; bottom: -600px;">
@@ -42,7 +54,7 @@
                 <ui:VisualElement name="Body" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/FarmMerger/Art/UI/MapMenuBackgroundScreenGlow.png?fileID=2800000&amp;guid=defac92192026c44ab95a0a5448475be&amp;type=3#MapMenuBackgroundScreenGlow&quot;); padding-top: 0;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="Advice" picking-mode="Ignore" class="float_panel" style="flex-grow: 1; background-color: rgb(0, 0, 0); transition-duration: 0.5s; bottom: 0; transition-property: opacity; opacity: 0.5;" />
+        <ui:VisualElement name="Advice" picking-mode="Ignore" class="float_panel" style="flex-grow: 1; background-color: rgb(0, 0, 0); transition-duration: 0.5s; bottom: 0; transition-property: opacity; opacity: 0.5; visibility: visible;" />
         <ui:VisualElement name="BottomPanel" style="flex-grow: 1; height: 8%; max-height: 8%; min-height: 8%; align-self: stretch; flex-direction: row; bottom: 0; position: absolute; background-color: rgb(253, 243, 255); width: 100%; max-width: 100%; min-width: 100%; padding-top: 3%; padding-right: 10%; padding-bottom: 8%; padding-left: 10%; justify-content: space-between; left: 0; border-top-width: 3px; border-top-color: rgb(141, 219, 249);">
             <ui:VisualElement name="ExitButton" class="tab_button" style="flex-grow: 1; background-color: rgba(72, 0, 0, 0); background-image: url(&quot;project://database/Assets/FarmMerger/Art/UI/Exit.png?fileID=2800000&amp;guid=fba1b7891c64ceb45a473139e35717ea&amp;type=3#Exit&quot;); display: flex; width: 22px; max-width: 22px; min-width: 22px;" />
             <ui:VisualElement name="ShopButton" class="tab_button" style="flex-grow: 1; background-color: rgba(72, 0, 0, 0); background-image: url(&quot;project://database/Assets/FarmMerger/Art/UI/Shop.png?fileID=2800000&amp;guid=7dbe801cacf16b74b917f2dc7ecfedf4&amp;type=3#Shop&quot;); display: flex; width: 27px; max-width: 27px; min-width: 27px;" />
