@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using Zenject;
 using UnityEngine;
 
@@ -35,12 +33,35 @@ namespace Game
 
             Container.Bind<ResourceManager>().AsSingle().NonLazy();
             Container.Bind<ResourceData>().FromInstance(ResourceData.k_defaultData).WhenInjectedInto<ResourceManager>();
+
+            Container.BindInterfacesAndSelfTo<StatisticsManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AchievementManager>().AsSingle().NonLazy();
             
             Container.Bind<Tradesman>().FromInstance(_tradesman).AsSingle();
             
             _saveController = Container.Instantiate<SaveController>();
         }
 
-       
+        public void OnEnable()
+        {
+            Container
+                .Resolve<AchievementManager>()
+                .SetAchievements(new() {
+                    { 
+                        AchievementType.Merge10Eggs,
+                        Container.Instantiate<AchievementsCheckers.MergeCounts>(new object[]{
+                            new GameStatistics.GridObjectType(1, 0),
+                            10
+                        }) 
+                    },
+                    {
+                        AchievementType.CreateChicken,
+                        Container.Instantiate<AchievementsCheckers.CreateObject>(new object[]
+                        {
+                            new GameStatistics.GridObjectType(1, 2),
+                        })
+                    }
+            });
+        }       
     }
 }

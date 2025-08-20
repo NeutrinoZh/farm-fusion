@@ -9,7 +9,9 @@ namespace Game
 {
     public class GameGrid
     {
-        public Action OnResize;
+        public event Action OnResize;
+        public event Action<int, int> OnMerge;
+        public event Action<int, int> OnAdd;
 
         public Vector2Int Size => _gridSize;
         public GridData Data => _data;
@@ -67,6 +69,7 @@ namespace Game
             _data.objects.Add(objectData);
             _objectInstances.Add(objectData.index, instance);
 
+            OnAdd?.Invoke(objectData.type, objectData.level);
             return instance;
         }
 
@@ -186,15 +189,20 @@ namespace Game
             if (lhs.Type != rhs.Type)
                 return;
 
+            int type = lhs.Type;
+            int level = lhs.Level;
+
             AddObject(new GridObjectData()
             {
-                type = lhs.Type,
-                level = lhs.Level + 1,
+                type = type,
+                level = level + 1,
                 position = lhs.Position
             });
-
+            
             RemoveObject(lhs);
             RemoveObject(rhs);
+            
+            OnMerge?.Invoke(type, level);
         }
     };
 }

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Game
 {
@@ -14,9 +13,10 @@ namespace Game
         private readonly GameGrid _gameGrid;
         private readonly QuestManager _questManager;
         private readonly LifeController _lifeController;
-        
         private readonly GridLevels _gridLevels;
         private readonly UpgradesManager _upgradesManager;
+        private readonly AchievementManager _achievementManager;
+        private readonly StatisticsManager _statisticsManager;
         
         [Serializable]
         private struct GameData
@@ -24,13 +24,23 @@ namespace Game
             public GridData Grid;
             public ResourceData Resource;
             public UpgradesData Upgrades;
+            public AchievementsData Achievements;
+            public GameStatistics Statistics;
             
             public int CurrentQuestIndex;
             public int CurrentQuestProgress;
             public DateTime CloseTime;
         }
         
-        public SaveController(LifeController lifeController, GameGrid gameGrid, GridLevels gridLevels, UpgradesManager upgradesManager, ResourceManager resourceManager, QuestManager questManager)
+        public SaveController(
+            LifeController lifeController,
+            GameGrid gameGrid,
+            GridLevels gridLevels,
+            UpgradesManager upgradesManager,
+            ResourceManager resourceManager,
+            QuestManager questManager,
+            AchievementManager achievementManager,
+            StatisticsManager statisticsManager)
         {
             _lifeController = lifeController;
             _gameGrid = gameGrid;
@@ -38,6 +48,8 @@ namespace Game
             _questManager = questManager;
             _gridLevels = gridLevels;
             _upgradesManager = upgradesManager;
+            _achievementManager = achievementManager;
+            _statisticsManager = statisticsManager;
             
             Load();
 
@@ -58,21 +70,25 @@ namespace Game
                 Grid = GridData.k_defaultData,
                 Resource = ResourceData.k_defaultData,
                 Upgrades = UpgradesData.k_defaultData,
+                Achievements = AchievementsData.k_defaultData,
+                Statistics = GameStatistics.k_defaultData,
                 CurrentQuestIndex = 0,
                 CurrentQuestProgress = 0,
-                CloseTime = DateTime.Now
+                CloseTime = DateTime.Now,
             };
             
             if (File.Exists(SavePath))
             {
                 string json = File.ReadAllText(SavePath);
-                gameData = JsonUtility.FromJson<GameData>(json);
+                gameData = JsonConvert.DeserializeObject<GameData>(json);
             }
             
             _resourceManager.Data = gameData.Resource;
             _upgradesManager.Data = gameData.Upgrades;
+            _achievementManager.Data = gameData.Achievements;
             _questManager.CurrentQuestIndex = gameData.CurrentQuestIndex;
             _questManager.CurrentQuestProgress = gameData.CurrentQuestProgress;
+            _statisticsManager.Data = gameData.Statistics;
             
             LoadGameGrid(gameData);
             
@@ -107,15 +123,17 @@ namespace Game
         #endif
             
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-            string json = JsonUtility.ToJson(new GameData()
+            string json = JsonConvert.SerializeObject(new GameData()
             {
                 Grid = _gameGrid.Data,
                 Resource = _resourceManager.Data,
                 Upgrades = _upgradesManager.Data,
+                Statistics = _statisticsManager.Data,
+                Achievements = _achievementManager.Data,
                 CurrentQuestIndex = _questManager.CurrentQuestIndex,
                 CurrentQuestProgress = _questManager.CurrentQuestProgress,
                 CloseTime = DateTime.Now
-            }, prettyPrint);
+            }, prettyPrint ? Formatting.Indented : Formatting.None);
             
             File.WriteAllText(SavePath, json);
         }
