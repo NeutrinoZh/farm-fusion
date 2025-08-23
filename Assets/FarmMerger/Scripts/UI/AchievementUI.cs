@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
+using Zenject;
 
 namespace Game
 {
@@ -21,11 +22,16 @@ namespace Game
         
         private readonly ScrollView _newAchievementsList;
         private readonly ScrollView _completedAchievementsList;
+        
+        private readonly AchievementScrollView _newAchievementsController;
+        private readonly AchievementScrollView _completedAchievementsController;
 
         private VisualElement _activeTab;
         
         public AchievementUI(
+            DiContainer container,
             Screens screens,
+            VisualTreeAsset achievementTemplate,
             VisualElement page)
         {
             _screens = screens;
@@ -36,6 +42,11 @@ namespace Game
             
             _newAchievementsList = page.Q<ScrollView>(k_newAchievementListId);
             _completedAchievementsList = page.Q<ScrollView>(k_completedAchievementListId);
+
+            _newAchievementsController = container.Instantiate<AchievementScrollView>(new object[] {
+                achievementTemplate,
+                _newAchievementsList
+            });
             
             _newAchievementsTab.RegisterCallback<PointerDownEvent>(SetActiveNewTab);
             _completedAchievementsTab.RegisterCallback<PointerDownEvent>(SetActiveCompletedTab);

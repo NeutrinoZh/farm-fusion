@@ -18,6 +18,8 @@ namespace Game
         [SerializeField] private UIDocument _uiDocument;
 
         [SerializeField] private VisualTreeAsset _shopProductTemplate;
+        [SerializeField] private VisualTreeAsset _achievementTemplate;
+        
         [SerializeField] private List<ShopProductData> _shopProductsList;
         
         private const string k_hudId = "HUD";
@@ -95,7 +97,9 @@ namespace Game
             _rewardPopupUI = new RewardPopup(this, _rewardPopup);
             _diContainer.Bind<RewardPopup>().FromInstance(_rewardPopupUI);
 
-            _achievementUI = new AchievementUI(this, _achievementGroup);
+            _achievementUI = _diContainer.Instantiate<AchievementUI>(new object[]{
+                this, _achievementTemplate, _achievementGroup
+            });
             
             _diContainer.Bind<Screens>().FromInstance(this);
             _diContainer.Instantiate<ShopController>();

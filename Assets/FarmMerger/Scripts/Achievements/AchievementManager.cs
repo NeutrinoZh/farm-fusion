@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Zenject;
+using System;
 
 namespace Game
 {
@@ -10,6 +10,8 @@ namespace Game
         private Dictionary<AchievementType, AchievementChecker>  _achievementCheckers;
         
         public AchievementsData Data { get; set; }
+        
+        public event Action OnAchievementsUpdated;
         
         public void SetAchievements(Dictionary<AchievementType, AchievementChecker> achievementCheckers)
         {
@@ -23,8 +25,6 @@ namespace Game
         
         private void UnlockAchievement(AchievementType achievement)
         {
-            Debug.Log($"UnlockAchievement: {achievement}");
-            
             if (!Data.LockedAchievements.Contains(achievement))
                 return;
             
@@ -40,8 +40,11 @@ namespace Game
                 where checker.IsAchieved()
                 select achievement).ToList();
 
-            foreach (var achievement in toUnlock)
+            foreach (var achievement in toUnlock) 
                 UnlockAchievement(achievement);
+            
+            if (toUnlock.Count > 0)
+                OnAchievementsUpdated?.Invoke();
         }
     }
 }

@@ -688,6 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiDocument: {fileID: 796973646}
   _shopProductTemplate: {fileID: 9197481963319205126, guid: e37de5927fa2b604c9e9ae43de9fef41, type: 3}
+  _achievementTemplate: {fileID: 9197481963319205126, guid: bd2eebad2d74fe740aec8b34999858ef, type: 3}
   _shopProductsList:
   - {fileID: 11400000, guid: af947a9dd064b3041a76427325b90284, type: 2}
   - {fileID: 11400000, guid: 629af3f9e863edb4c9f3b0a08839b095, type: 2}
@@ -1596,6 +1597,7 @@ MonoBehaviour:
   _quests: {fileID: 11400000, guid: 712d3a3d114c74d4caf7ca239339058c, type: 2}
   _tradesman: {fileID: 2118491563}
   _lifeController: {fileID: 785106071}
+  _achievementsDB: {fileID: 11400000, guid: 4f256d29b94b8fc4f8b7267f98e2f36c, type: 2}
 --- !u!4 &2118491562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5493067084159739550, guid: 42ec493982cb50f4989aeda64dc69efe, type: 3}

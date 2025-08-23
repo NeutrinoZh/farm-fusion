@@ -13,6 +13,7 @@ namespace Game
         [SerializeField] private Quests _quests;
         [SerializeField] private Tradesman _tradesman;
         [SerializeField] private LifeController _lifeController;
+        [SerializeField] private AchievementsDB _achievementsDB;
         
         private SaveController _saveController;
         
@@ -36,6 +37,7 @@ namespace Game
 
             Container.BindInterfacesAndSelfTo<StatisticsManager>().AsSingle();
             Container.BindInterfacesAndSelfTo<AchievementManager>().AsSingle().NonLazy();
+            Container.Bind<AchievementsDB>().FromInstance(_achievementsDB);
             
             Container.Bind<Tradesman>().FromInstance(_tradesman).AsSingle();
             
