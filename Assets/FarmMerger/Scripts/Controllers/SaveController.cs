@@ -2,6 +2,8 @@
 using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using UnityEngine.Serialization;
 
 namespace Game
 {
@@ -17,10 +19,13 @@ namespace Game
         private readonly UpgradesManager _upgradesManager;
         private readonly AchievementManager _achievementManager;
         private readonly StatisticsManager _statisticsManager;
+
+        private static int CurrentVersion = 1;
         
         [Serializable]
         private struct GameData
         { 
+            public int Version;
             public GridData Grid;
             public ResourceData Resource;
             public UpgradesData Upgrades;
@@ -67,6 +72,7 @@ namespace Game
         {
             GameData gameData = new()
             {
+                Version = CurrentVersion,
                 Grid = GridData.k_defaultData,
                 Resource = ResourceData.k_defaultData,
                 Upgrades = UpgradesData.k_defaultData,
@@ -80,7 +86,14 @@ namespace Game
             if (File.Exists(SavePath))
             {
                 string json = File.ReadAllText(SavePath);
-                gameData = JsonConvert.DeserializeObject<GameData>(json);
+
+                var jObject = JObject.Parse(json);
+                int version = jObject["Version"]?.Value<int>() ?? 0;
+
+                if (version > 0 && version <= CurrentVersion)
+                    JsonConvert.PopulateObject(json, gameData);
+                else 
+                    Debug.LogError("Invalid version of save file");
             }
             
             _resourceManager.Data = gameData.Resource;
@@ -125,6 +138,7 @@ namespace Game
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             string json = JsonConvert.SerializeObject(new GameData()
             {
+                Version = CurrentVersion,
                 Grid = _gameGrid.Data,
                 Resource = _resourceManager.Data,
                 Upgrades = _upgradesManager.Data,

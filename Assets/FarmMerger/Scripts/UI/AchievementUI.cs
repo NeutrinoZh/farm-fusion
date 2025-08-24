@@ -14,6 +14,9 @@ namespace Game
 
         private const string k_activeTabClassName = "active";
         
+        private readonly AchievementManager _achievementManager;
+        private readonly AchievementsDB _achievementsDB;
+        
         private readonly VisualElement _page;
         private readonly Screens _screens;
         
@@ -32,8 +35,12 @@ namespace Game
             DiContainer container,
             Screens screens,
             VisualTreeAsset achievementTemplate,
-            VisualElement page)
+            VisualElement page,
+            AchievementManager achievementManager,
+            AchievementsDB achievementsDB)
         {
+            _achievementManager = achievementManager;
+            _achievementsDB = achievementsDB;
             _screens = screens;
             _page = page;
 
@@ -58,8 +65,23 @@ namespace Game
             
             _newAchievementsTab.RegisterCallback<PointerDownEvent>(SetActiveNewTab);
             _completedAchievementsTab.RegisterCallback<PointerDownEvent>(SetActiveCompletedTab);
+
+            _achievementManager.OnUnlockedAchievement += HandleUnlockAchievement;
         }
 
+        ~AchievementUI()
+        {
+            _achievementManager.OnUnlockedAchievement -= HandleUnlockAchievement;
+        }
+        
+        private void HandleUnlockAchievement(AchievementType achievementType)
+        {
+            var achievementConfig = _achievementsDB.Achievements.Find(
+                item => item.Type == achievementType);
+            
+            _screens.ShowAchievementPopup(achievementConfig);
+        }
+        
         private void SetActiveNewTab(PointerDownEvent evt)
         {
             _newAchievementsTab.AddToClassList(k_activeTabClassName);

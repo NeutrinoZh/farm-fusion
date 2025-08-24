@@ -11,6 +11,7 @@ namespace Game
         public AchievementsData Data { get; set; }
 
         public event Action OnAchievementsUpdated;
+        public event Action<AchievementType> OnUnlockedAchievement;
         
         public void SetAchievements(Dictionary<AchievementType, AchievementChecker> achievementCheckers)
         {
@@ -29,6 +30,8 @@ namespace Game
             
             Data.LockedAchievements.Remove(achievement);
             Data.UnlockedAchievements.Add(achievement);
+            
+            OnUnlockedAchievement?.Invoke(achievement);
         }
         
         public void Initialize()

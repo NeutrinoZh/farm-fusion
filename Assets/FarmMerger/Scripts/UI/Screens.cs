@@ -31,6 +31,7 @@ namespace Game
         private const string k_purchasePopupId = "PurchasePopup";
         private const string k_questsId = "SidePanel";
         private const string k_rewardPopupId = "AwardPopup";
+        private const string k_achievementPopupId = "AchievementPopup";
 
         private const int k_bottomOffsetHide = -480;
         private const int k_bottomOffsetShow = 0;
@@ -48,6 +49,7 @@ namespace Game
         private VisualElement _purchasePopup;
         private VisualElement _questsGroup;
         private VisualElement _rewardPopup;
+        private VisualElement _achievementPopup;
 
         private GridUI _gridUI;
         private QuestsUI _questsUI;
@@ -56,6 +58,7 @@ namespace Game
         private AchievementUI _achievementUI;
         private PurchasePopup _purchasePopupUI;
         private RewardPopup _rewardPopupUI;
+        private AchievementPopup _achievementPopupUI;
         
         private DiContainer _diContainer;
 
@@ -78,6 +81,7 @@ namespace Game
             _purchasePopup = root.Q<VisualElement>(k_purchasePopupId);
             _questsGroup = root.Q<VisualElement>(k_questsId);
             _rewardPopup = root.Q<VisualElement>(k_rewardPopupId);
+            _achievementPopup = root.Q<VisualElement>(k_achievementPopupId);
             
             _gridUI = new GridUI(this, _uiDocument, _diContainer.Resolve<ResourceManager>());
             _diContainer.Bind<GridUI>().FromInstance(_gridUI);
@@ -97,6 +101,11 @@ namespace Game
             _rewardPopupUI = new RewardPopup(this, _rewardPopup);
             _diContainer.Bind<RewardPopup>().FromInstance(_rewardPopupUI);
 
+            _achievementPopupUI = _diContainer.Instantiate<AchievementPopup>(new object[]{
+                this, _achievementPopup  
+            });
+            _diContainer.Bind<AchievementPopup>().FromInstance(_achievementPopupUI);
+            
             _achievementUI = _diContainer.Instantiate<AchievementUI>(new object[]{
                 this, _achievementTemplate, _achievementGroup
             });
@@ -165,11 +174,21 @@ namespace Game
             _foggingGroup.style.display = DisplayStyle.Flex;
             _foggingGroup.style.opacity = k_opacityShow;
         }
+
+        public void ShowAchievementPopup(AchievementConfig achievement)
+        {
+            _achievementPopupUI.SetData(achievement);
+            
+            _achievementPopup.style.bottom = k_bottomOffsetShow;
+            _foggingGroup.style.display = DisplayStyle.Flex;
+            _foggingGroup.style.opacity = k_opacityShow;
+        }
         
         public void HidePopups()
         {
             _rewardPopup.style.bottom = k_bottomOffsetHide;
             _purchasePopup.style.bottom = k_bottomOffsetHide;
+            _achievementPopup.style.bottom = k_bottomOffsetHide;
             _foggingGroup.style.opacity = k_opacityHide;
             
             StartCoroutine(SwitcherDisplayPopupCoroutine());

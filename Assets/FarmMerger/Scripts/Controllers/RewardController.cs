@@ -4,26 +4,39 @@ namespace Game
 {
     public class RewardController
     {
-        private RewardPopup _popup;
+        private AchievementPopup _achievementPopup;
+        private RewardPopup _questPopup;
         private QuestManager _questManager;
         private ResourceManager _resourceManager;
         
-        [Inject]
-        public RewardController(RewardPopup popup, ResourceManager resourceManager, QuestManager questManager)
+        public RewardController(
+            RewardPopup questPopup,
+            ResourceManager resourceManager,
+            QuestManager questManager,
+            AchievementPopup achievementPopup
+            )
         {
-            _popup = popup;
+            _questPopup = questPopup;
             _questManager = questManager;
             _resourceManager = resourceManager;
+            _achievementPopup = achievementPopup;
 
-            _popup.OnCollectReward += OnCollectReward;
+            _questPopup.OnCollectReward += OnCollectQuestReward;
+            _achievementPopup.OnCollectReward += OnCollectAchievementReward;
         }
 
         ~RewardController()
         {
-            _popup.OnCollectReward -= OnCollectReward;
+            _achievementPopup.OnCollectReward -= OnCollectAchievementReward;
+            _questPopup.OnCollectReward -= OnCollectQuestReward;
         }
 
-        private void OnCollectReward()
+        private void OnCollectAchievementReward(int reward)
+        {
+            _resourceManager.Wheat += reward;
+        }
+        
+        private void OnCollectQuestReward()
         {
             _resourceManager.Money += _questManager.CurrentQuest.Award;
             _questManager.NextQuest();
