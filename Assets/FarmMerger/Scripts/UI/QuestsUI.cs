@@ -16,6 +16,8 @@ namespace Game
         private readonly VisualElement _icon;
         private readonly VisualElement _completedIcon;
         private readonly Label _counter;
+        
+        private const float k_animationAmplitude = 2;
 
         public QuestsUI(Screens screens, VisualElement questsPanel, QuestManager questManager)
         {
@@ -38,6 +40,14 @@ namespace Game
             
             if (_questManager.IsQuestComplete)
                 HandleCompleteQuest();
+
+            float t = 0f;
+            questsPanel.schedule.Execute(() =>
+            {
+                t += Time.deltaTime;
+                float y = Mathf.Sin(t * 2f) * k_animationAmplitude; 
+                _questsPanel.transform.position = new Vector3(0, y, 0);
+            }).Every(20);
         }
 
         ~QuestsUI()

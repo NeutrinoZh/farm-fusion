@@ -20,21 +20,21 @@ namespace Game
         private readonly AchievementManager _achievementManager;
         private readonly StatisticsManager _statisticsManager;
 
-        private static int CurrentVersion = 1;
+        private const int k_currentVersion = 1;
         
         [Serializable]
-        private struct GameData
+        private class GameData
         { 
-            public int Version;
-            public GridData Grid;
-            public ResourceData Resource;
-            public UpgradesData Upgrades;
-            public AchievementsData Achievements;
-            public GameStatistics Statistics;
+            public int Version { get; set; }
+            public GridData Grid { get; set; }
+            public ResourceData Resource { get; set; }
+            public UpgradesData Upgrades { get; set; }
+            public AchievementsData Achievements { get; set; }
+            public GameStatistics Statistics { get; set; }
             
-            public int CurrentQuestIndex;
-            public int CurrentQuestProgress;
-            public DateTime CloseTime;
+            public int CurrentQuestIndex { get; set; }
+            public int CurrentQuestProgress { get; set; }
+            public DateTime CloseTime { get; set; }
         }
         
         public SaveController(
@@ -72,7 +72,7 @@ namespace Game
         {
             GameData gameData = new()
             {
-                Version = CurrentVersion,
+                Version = k_currentVersion,
                 Grid = GridData.k_defaultData,
                 Resource = ResourceData.k_defaultData,
                 Upgrades = UpgradesData.k_defaultData,
@@ -90,7 +90,8 @@ namespace Game
                 var jObject = JObject.Parse(json);
                 int version = jObject["Version"]?.Value<int>() ?? 0;
 
-                if (version > 0 && version <= CurrentVersion)
+
+                if (version > 0 && version <= k_currentVersion)
                     JsonConvert.PopulateObject(json, gameData);
                 else 
                     Debug.LogError("Invalid version of save file");
@@ -138,7 +139,7 @@ namespace Game
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             string json = JsonConvert.SerializeObject(new GameData()
             {
-                Version = CurrentVersion,
+                Version = k_currentVersion,
                 Grid = _gameGrid.Data,
                 Resource = _resourceManager.Data,
                 Upgrades = _upgradesManager.Data,

@@ -8,12 +8,13 @@ namespace Game
     {
         private const string k_iconId = "Icon";
         private const string k_rewardLabelId = "AwardLabel";
+        private const string k_descriptionId = "Description";
         private const string k_collectButtonId = "CollectRewardButton";
         private const string k_closeButtonId = "CloseButton";
         
         private readonly Screens _screens;
-        
-        private readonly VisualElement _popup;
+
+        private readonly Label _descriptionLabel;
         private readonly Label _rewardLabel;
         private readonly VisualElement _collectButton;
         private readonly VisualElement _icon;
@@ -25,15 +26,15 @@ namespace Game
         public AchievementPopup(Screens screens, VisualElement popup)
         {
             _screens = screens;
-            _popup = popup;
-            
-            _icon = _popup.Q<VisualElement>(k_iconId);
-            _rewardLabel = _popup.Q<Label>(k_rewardLabelId);
-            _collectButton = _popup.Q<VisualElement>(k_collectButtonId);
+
+            _icon = popup.Q<VisualElement>(k_iconId);
+            _rewardLabel = popup.Q<Label>(k_rewardLabelId);
+            _collectButton = popup.Q<VisualElement>(k_collectButtonId);
+            _descriptionLabel = popup.Q<Label>(k_descriptionId);
             
             _collectButton.RegisterCallback<PointerDownEvent>(e => HandleClick());
 
-            var closeButton = _popup.Q<VisualElement>(k_closeButtonId);
+            var closeButton = popup.Q<VisualElement>(k_closeButtonId);
             closeButton.RegisterCallback<PointerDownEvent>(e => CloseButtonHandle());
         }
 
@@ -58,6 +59,7 @@ namespace Game
             _rewardAmount = achievement.AwardAmount;
             
             _rewardLabel.text = achievement.AwardAmount.ToString();
+            _descriptionLabel.text = achievement.Description;
             
             var background = _icon.style.backgroundImage.value;
             background.sprite = achievement.Icon;

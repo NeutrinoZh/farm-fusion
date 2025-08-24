@@ -33,7 +33,7 @@ namespace Game
         private const string k_rewardPopupId = "AwardPopup";
         private const string k_achievementPopupId = "AchievementPopup";
 
-        private const int k_bottomOffsetHide = -480;
+        private const int k_bottomOffsetHide = -600;
         private const int k_bottomOffsetShow = 0;
         
         private const float k_opacityHide = 0;
