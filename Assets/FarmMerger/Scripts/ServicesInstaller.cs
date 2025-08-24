@@ -62,6 +62,14 @@ namespace Game
                         {
                             new GameStatistics.GridObjectType(1, 2),
                         })
+                    },
+                    {
+                        AchievementType.Merge100Eggs,
+                        Container.Instantiate<AchievementsCheckers.MergeCounts>(new object[]
+                        {
+                            new GameStatistics.GridObjectType(1, 0),
+                            100
+                        })
                     }
             });
         }       

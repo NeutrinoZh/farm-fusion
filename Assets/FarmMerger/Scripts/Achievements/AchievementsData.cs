@@ -14,6 +14,7 @@ namespace Game
             LockedAchievements = new()
             {
                 AchievementType.Merge10Eggs,
+                AchievementType.Merge100Eggs,
                 AchievementType.CreateChicken,
             },
             UnlockedAchievements = new()

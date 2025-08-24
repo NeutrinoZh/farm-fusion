@@ -112,8 +112,8 @@
     width: 100%;
     height: auto;
     
-    border-color: rgb(197, 196, 186);
-    border-bottom-width: 3px;
+    border-color: rgb(211, 210, 198);
+    border-bottom-width: 1px;
 }
 
 .float_panel #PopUp #Body .section .content {

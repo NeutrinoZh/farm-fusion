@@ -10,6 +10,7 @@ namespace Game
         private readonly AchievementManager _achievementManager;
         private readonly AchievementsDB _achievementsDB;
         private readonly ScrollView _scrollView;
+        private readonly bool _useLockData;
         
         private readonly List<AchievementSlotController> _achievementSlots;
         
@@ -17,15 +18,17 @@ namespace Game
             AchievementManager achievementManager,
             VisualTreeAsset achievementTemplate,
             AchievementsDB achievementsDB,
-            ScrollView scrollView
+            ScrollView scrollView,
+            bool useLockData
             )
         {
             _achievementSlots = new();
             _achievementTemplate = achievementTemplate;
             _achievementManager = achievementManager;
             _achievementsDB = achievementsDB;
+            _useLockData = useLockData;
             _scrollView = scrollView;
-
+            
             Initialize();
         }
 
@@ -41,7 +44,13 @@ namespace Game
 
         private void UpdateUI()
         {
-            var achievements = _achievementManager.Data.LockedAchievements;
+            var achievements = _useLockData ? 
+                _achievementManager.Data.LockedAchievements :
+                _achievementManager.Data.UnlockedAchievements;
+            
+            foreach (var slot in _achievementSlots)
+                slot.SetEnable(false);
+            
             for (int i = 0; i < achievements.Count; ++i)
             {
                 if (i >= _achievementSlots.Count)
@@ -49,8 +58,14 @@ namespace Game
 
                 var achievementConfig = _achievementsDB.Achievements.Find(
                     item => item.Type == achievements[i]);
-                
-                _achievementSlots[i].SetAchievementData(achievementConfig);
+
+                if (achievementConfig)
+                {
+                    _achievementSlots[i].SetAchievementData(achievementConfig);
+                    _achievementSlots[i].SetEnable(true);
+                }
+                else
+                    Debug.LogError($"Could not find achievement {achievements[i]}");
             }
         }
 

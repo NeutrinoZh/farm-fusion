@@ -5,12 +5,11 @@ using System;
 
 namespace Game
 {
-    public class AchievementManager : ITickable
+    public class AchievementManager : IInitializable, ITickable
     {
         private Dictionary<AchievementType, AchievementChecker>  _achievementCheckers;
-        
         public AchievementsData Data { get; set; }
-        
+
         public event Action OnAchievementsUpdated;
         
         public void SetAchievements(Dictionary<AchievementType, AchievementChecker> achievementCheckers)
@@ -31,7 +30,12 @@ namespace Game
             Data.LockedAchievements.Remove(achievement);
             Data.UnlockedAchievements.Add(achievement);
         }
-
+        
+        public void Initialize()
+        {
+            OnAchievementsUpdated?.Invoke();
+        }
+        
         public void Tick()
         {
             var toUnlock = (

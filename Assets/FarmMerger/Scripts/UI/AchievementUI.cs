@@ -45,7 +45,15 @@ namespace Game
 
             _newAchievementsController = container.Instantiate<AchievementScrollView>(new object[] {
                 achievementTemplate,
-                _newAchievementsList
+                _newAchievementsList,
+                true
+            });
+
+            _completedAchievementsController = container.Instantiate<AchievementScrollView>(new object[]
+            {
+                achievementTemplate,
+                _completedAchievementsList,
+                false
             });
             
             _newAchievementsTab.RegisterCallback<PointerDownEvent>(SetActiveNewTab);
@@ -57,8 +65,8 @@ namespace Game
             _newAchievementsTab.AddToClassList(k_activeTabClassName);
             _completedAchievementsTab.RemoveFromClassList(k_activeTabClassName);
             
-            _newAchievementsList.style.visibility = Visibility.Visible;
-            _completedAchievementsList.style.visibility = Visibility.Hidden;
+            _newAchievementsList.style.display = DisplayStyle.Flex;
+            _completedAchievementsList.style.display = DisplayStyle.None;
         }
 
         private void SetActiveCompletedTab(PointerDownEvent evt)
@@ -66,8 +74,8 @@ namespace Game
             _newAchievementsTab.RemoveFromClassList(k_activeTabClassName);
             _completedAchievementsTab.AddToClassList(k_activeTabClassName);
             
-            _newAchievementsList.style.visibility = Visibility.Hidden;
-            _completedAchievementsList.style.visibility = Visibility.Visible;
+            _newAchievementsList.style.display = DisplayStyle.None;
+            _completedAchievementsList.style.display = DisplayStyle.Flex;
         }
     }
 }

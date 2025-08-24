@@ -34,17 +34,17 @@
         <ui:VisualElement name="Achievements" class="float_panel" style="flex-grow: 1; bottom: -600px;">
             <ui:VisualElement name="PopUp" style="flex-grow: 1; margin-top: 30%; flex-direction: column-reverse;">
                 <ui:VisualElement name="Body" style="flex-grow: 1; border-top-left-radius: 5%; border-top-right-radius: 5%; border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-width: 0;">
-                    <ui:ScrollView name="NewList" class="section" style="display: none;" />
-                    <ui:ScrollView name="CompletedList" class="section" />
+                    <ui:ScrollView name="NewList" vertical-scroller-visibility="Hidden" horizontal-scroller-visibility="Hidden" class="section" style="display: none;" />
+                    <ui:ScrollView name="CompletedList" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" class="section" />
                 </ui:VisualElement>
                 <ui:VisualElement name="Header" style="flex-grow: 1;">
                     <ui:VisualElement name="NewTab" class="tab" style="flex-grow: 1;">
                         <ui:VisualElement name="Shadow" class="shadow" style="flex-grow: 1;" />
-                        <ui:Label tabindex="-1" text="New" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="-unity-font-definition: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo%20SDF%201.asset?fileID=11400000&amp;guid=18300946a00016f48a6b7e443d4fef04&amp;type=2#chickenwonder-vnaqo SDF 1&quot;); -unity-font: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo.ttf?fileID=12800000&amp;guid=e0a68f7e2dd943243b00ffddd03bbc35&amp;type=3#chickenwonder-vnaqo&quot;);" />
+                        <ui:Label tabindex="-1" text="New" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="-unity-font-definition: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo%20SDF%201.asset?fileID=11400000&amp;guid=18300946a00016f48a6b7e443d4fef04&amp;type=2#chickenwonder-vnaqo SDF 1&quot;); -unity-font: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo.ttf?fileID=12800000&amp;guid=e0a68f7e2dd943243b00ffddd03bbc35&amp;type=3#chickenwonder-vnaqo&quot;); font-size: 14px; height: 100%;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="CompletedTab" class="tab active" style="flex-grow: 1;">
                         <ui:VisualElement name="Shadow" class="shadow" style="flex-grow: 1;" />
-                        <ui:Label tabindex="-1" text="Completed" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo.ttf?fileID=12800000&amp;guid=e0a68f7e2dd943243b00ffddd03bbc35&amp;type=3#chickenwonder-vnaqo&quot;); -unity-font-definition: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo%20SDF%201.asset?fileID=11400000&amp;guid=18300946a00016f48a6b7e443d4fef04&amp;type=2#chickenwonder-vnaqo SDF 1&quot;);" />
+                        <ui:Label tabindex="-1" text="Completed" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo.ttf?fileID=12800000&amp;guid=e0a68f7e2dd943243b00ffddd03bbc35&amp;type=3#chickenwonder-vnaqo&quot;); -unity-font-definition: url(&quot;project://database/Assets/FarmMerger/Fonts/chickenwonder-vnaqo%20SDF%201.asset?fileID=11400000&amp;guid=18300946a00016f48a6b7e443d4fef04&amp;type=2#chickenwonder-vnaqo SDF 1&quot;); font-size: 14px; height: 80%;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
