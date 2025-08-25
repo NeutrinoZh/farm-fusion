@@ -21,7 +21,7 @@
     
     transition-property: bottom;
     bottom: 0;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
 }
 
 .float_panel #PopUp {

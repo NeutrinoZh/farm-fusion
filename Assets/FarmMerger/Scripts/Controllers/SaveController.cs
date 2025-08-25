@@ -91,7 +91,7 @@ namespace Game
                 int version = jObject["Version"]?.Value<int>() ?? 0;
 
 
-                if (version > 0 && version <= k_currentVersion)
+                if (version is > 0 and <= k_currentVersion)
                     JsonConvert.PopulateObject(json, gameData);
                 else 
                     Debug.LogError("Invalid version of save file");
@@ -115,7 +115,7 @@ namespace Game
             _gameGrid.Resize(gridParams.size, gridParams.backgroundPosition);
             
             foreach (var obj in gameData.Grid.objects)
-                _gameGrid.AddObject(obj);
+                _gameGrid.AddObject(obj, Vector3.zero);
             
             if (
                 gameData.Grid.objects.Count == 0 && 
@@ -125,7 +125,7 @@ namespace Game
                 {
                     type = 0,
                     position = position
-                });
+                }, Vector3.zero);
         }
 
         private void Save()

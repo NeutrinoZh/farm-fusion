@@ -17,7 +17,7 @@ namespace Game
         private readonly VisualElement _completedIcon;
         private readonly Label _counter;
         
-        private const float k_animationAmplitude = 2;
+        private const float k_animationAmplitude = 3;
 
         public QuestsUI(Screens screens, VisualElement questsPanel, QuestManager questManager)
         {

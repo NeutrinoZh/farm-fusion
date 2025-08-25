@@ -14,6 +14,7 @@ namespace Game
         [SerializeField] private Tradesman _tradesman;
         [SerializeField] private LifeController _lifeController;
         [SerializeField] private AchievementsDB _achievementsDB;
+        [SerializeField] private ParticleSystem _flashRoundParticle;
         
         private SaveController _saveController;
         
@@ -40,6 +41,8 @@ namespace Game
             Container.Bind<AchievementsDB>().FromInstance(_achievementsDB);
             
             Container.Bind<Tradesman>().FromInstance(_tradesman).AsSingle();
+
+            Container.Bind<ParticleSystem>().WithId(Env.k_flashParticleId).FromInstance(_flashRoundParticle);
             
             _saveController = Container.Instantiate<SaveController>();
         }

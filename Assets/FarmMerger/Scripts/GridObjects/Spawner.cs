@@ -60,24 +60,23 @@ namespace Game
 
             float sumOfChances = 0;
             float random = UnityEngine.Random.Range(0.0f, 1.0f);
-
             SpawnableItem item = items[0];
 
             for (int i = 0; i < items.Count; ++i)
             {
                 sumOfChances += items[i].chanceToDrop;
-                if (sumOfChances > random)
-                {
-                    item = items[i];
-                    break;
-                }
+                if (sumOfChances < random)
+                    continue;
+
+                item = items[i];
+                break;
             }
 
             _grid.AddObject(new GridObjectData
             {
                 type = item.typeId,
                 position = position
-            });
+            }, transform.position);
 
             _resourceManager.Wheat -= _wheatCost;
         }

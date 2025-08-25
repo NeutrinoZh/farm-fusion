@@ -53,13 +53,16 @@ namespace Game
             transform.localPosition = _grid.GridPositionToLocalPosition(_data.position);
         }
 
-        public void Construct(GridObjectData data, GameGrid grid, int price)
+        public void Construct(GridObjectData data, GameGrid grid, int price, Vector3 position)
         {
             _data = data;
             _grid = grid;
             _price = price;
 
             Position = _data.position;
+            transform.position = position;
+            
+            transform.DOMove(_grid.GridPositionToWorldPosition(_data.position), 0.3f);
         }
 
         public bool Compare(GridObject rhs)

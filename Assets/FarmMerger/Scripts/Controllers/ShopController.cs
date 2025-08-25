@@ -2,6 +2,7 @@ using System;
 using System.Numerics;
 using UnityEngine;
 using Zenject;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Game
 {
@@ -89,7 +90,7 @@ namespace Game
                 {
                     type = type,
                     position = position
-                });
+                }, Vector3.down);
         }
         
         private void IncreaseGridSize()

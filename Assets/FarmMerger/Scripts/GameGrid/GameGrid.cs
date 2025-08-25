@@ -16,45 +16,56 @@ namespace Game
         public Vector2Int Size => _gridSize;
         public GridData Data => _data;
         
-        private const string k_Background = "Background";
-        private const string k_EnvBackground = "Background";
+        private const string k_background = "Background";
+        private const string k_envBackground = "Background";
 
-        private GridData _data;
-        private GridPrefabs _prefabs;
+        private readonly GridData _data;
+        private readonly GridPrefabs _prefabs;
+        private readonly GridLevels _gridLevels;
         private UpgradesManager _upgradesManager;
-        private GridLevels _gridLevels;
 
-        private Dictionary<int, GridObject> _objectInstances;
+        private readonly Dictionary<int, GridObject> _objectInstances;
         private int _nextIndex;
 
-        private Transform _transform;
-        private SpriteRenderer _renderer;
-        private BoxCollider2D _collider;
-        private DiContainer _diContainer;
-        private Env _env;
+        private readonly Transform _transform;
+        private readonly SpriteRenderer _renderer;
+        private readonly BoxCollider2D _collider;
+        private readonly DiContainer _diContainer;
+        private readonly ParticleSystem _mergeParticle;
+        private readonly Env _env;
 
         private float _oddYOffset;
         private float _oddXOffset;
 
         private Vector2Int _gridSize;
         
-        public GameGrid(Env env, GridData data, GridLevels gridLevels, UpgradesManager upgradesManager, GridPrefabs prefabs, Transform transform, DiContainer container)
+        public GameGrid(
+            Env env,
+            GridData data,
+            GridLevels gridLevels,
+            UpgradesManager upgradesManager,
+            GridPrefabs prefabs,
+            Transform transform, 
+            DiContainer container,
+            [Inject(Id=Env.k_flashParticleId)] ParticleSystem mergeParticle
+            )
         {
             _env = env;
             _data = data;
             _prefabs = prefabs;
-            _diContainer = container;
-            _upgradesManager = upgradesManager;
             _gridLevels = gridLevels;
+            _diContainer = container;
+            _mergeParticle = mergeParticle;
+            _upgradesManager = upgradesManager;
             
             _transform = transform;
-            _renderer = transform.Find(k_Background).GetComponent<SpriteRenderer>();
+            _renderer = transform.Find(k_background).GetComponent<SpriteRenderer>();
             _collider = transform.GetComponent<BoxCollider2D>();
             _objectInstances = new();
             _nextIndex = 0;
         }
         
-        public GridObject AddObject(GridObjectData objectData)
+        public GridObject AddObject(GridObjectData objectData, Vector3 position)
         {
             objectData.index = _nextIndex++;
 
@@ -64,7 +75,7 @@ namespace Game
 
             instance.transform.parent = _transform;
             instance.transform.localScale = scale;
-            instance.Construct(objectData, this, data.price);
+            instance.Construct(objectData, this, data.price, position);
 
             _data.objects.Add(objectData);
             _objectInstances.Add(objectData.index, instance);
@@ -76,7 +87,9 @@ namespace Game
         public void Resize(Vector2Int size, Vector3 backgroundPosition)
         {
             float scale = (float)_gridLevels.levels[0].size.x / size.x;
-            _transform.localScale = new Vector3(scale, scale, 1);
+            Vector3 scale3 = new Vector3(scale, scale, 1);
+
+            _transform.localScale = scale3;
 
             _gridSize = size;
             _renderer.size = size;
@@ -92,8 +105,11 @@ namespace Game
                 size.x * 2,
                 size.y * 3f
             );
-            _env.Background.transform.localScale = new Vector3(scale, scale, 1);
+            _env.Background.transform.localScale = scale3;
             _env.Background.transform.localPosition = backgroundPosition;
+            
+            foreach (var bush in _env.Scalables)
+                bush.transform.localScale = scale3;
 
             OnResize?.Invoke();
         }
@@ -107,6 +123,12 @@ namespace Game
             );
         }
 
+        public Vector3 GridPositionToWorldPosition(Vector2Int position)
+        {
+            return _transform.TransformPoint(GridPositionToLocalPosition(position));
+        }
+
+        
         public bool IsPositionCorrect(Vector2Int position)
         {
             return !(position.x < 0 || position.x >= Size.x || position.y < 0 || position.y >= Size.y);
@@ -192,15 +214,20 @@ namespace Game
             int type = lhs.Type;
             int level = lhs.Level;
 
+            var worldPosition = GridPositionToWorldPosition(lhs.Position);
+            
             AddObject(new GridObjectData()
             {
                 type = type,
                 level = level + 1,
                 position = lhs.Position
-            });
+            }, worldPosition);
             
             RemoveObject(lhs);
             RemoveObject(rhs);
+            
+            _mergeParticle.transform.position = worldPosition;
+            _mergeParticle.Play();
             
             OnMerge?.Invoke(type, level);
         }
