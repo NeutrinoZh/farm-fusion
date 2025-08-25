@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -7,6 +8,9 @@ namespace Game
 {
     public class GridDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
     {
+        public event Action<GridObject> OnStartDragging;
+        public event Action<GridObject> OnEndDragging;
+        
         private const string k_layerOfInteractable = "Interactable";
         private const float k_dragSensitive = 0.5f * 0.5f;
         private const int k_draggedSpriteOrder = 100;
@@ -51,7 +55,12 @@ namespace Game
 
             var worldPosition = Camera.main.ScreenToWorldPoint(fingers[0].screenPosition);
             worldPosition.z = 0;
-            _draggedObject.transform.position = worldPosition;
+            
+            _draggedObject.transform.position = Vector3.Lerp(
+                _draggedObject.transform.position,
+                worldPosition,
+                20f * Time.deltaTime
+            );
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -78,6 +87,7 @@ namespace Game
             }
 
             _dragging = false;
+            OnEndDragging?.Invoke(_draggedObject);
 
             if (!_draggedObject)
                 return;
@@ -122,8 +132,13 @@ namespace Game
         public void OnPointerMove(PointerEventData eventData)
         {
             float sqrDistance = (_downPosition - Camera.main.ScreenToWorldPoint(eventData.position)).sqrMagnitude;
-            if (sqrDistance > k_dragSensitive)
-                _dragging = true;
+            if (sqrDistance < k_dragSensitive || !_draggedObject)
+                return;
+
+            if (!_dragging)
+                OnStartDragging?.Invoke(_draggedObject);
+            
+            _dragging = true;
         }
     }
 }

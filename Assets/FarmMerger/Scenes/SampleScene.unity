@@ -2145,6 +2145,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugHUD: {fileID: 1061781179}
+--- !u!1 &1130909318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1130909319}
+  m_Layer: 0
+  m_Name: MergeAdvicesParticles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1130909319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130909318}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135441975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1135441974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,6 +2210,7 @@ Transform:
   - {fileID: 2118491562}
   - {fileID: 289523715}
   - {fileID: 507867560}
+  - {fileID: 1130909319}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1168797516
@@ -3317,6 +3349,7 @@ MonoBehaviour:
   _gameGrid: {fileID: 997055085}
   _gridPrefabs: {fileID: 11400000, guid: f0b4c11131684bb439708cb3b76baa43, type: 2}
   _gridPointer: {fileID: 997055086}
+  _gridDragDrop: {fileID: 997055090}
   _gridLevels: {fileID: 11400000, guid: 5f747cfcf30fa684da74085a9890a277, type: 2}
   _env: {fileID: 289523716}
   _quests: {fileID: 11400000, guid: 712d3a3d114c74d4caf7ca239339058c, type: 2}
@@ -3324,6 +3357,8 @@ MonoBehaviour:
   _lifeController: {fileID: 785106071}
   _achievementsDB: {fileID: 11400000, guid: 4f256d29b94b8fc4f8b7267f98e2f36c, type: 2}
   _flashRoundParticle: {fileID: 776923818}
+  _mergeAdvicesGroup: {fileID: 1130909319}
+  _mergeAdvice: {fileID: 6363652081083630878, guid: b219c04f384e7f345bb8ae1fef443965, type: 3}
 --- !u!1 &2116326311
 GameObject:
   m_ObjectHideFlags: 0

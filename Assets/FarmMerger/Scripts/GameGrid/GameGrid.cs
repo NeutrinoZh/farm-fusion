@@ -36,8 +36,11 @@ namespace Game
 
         private float _oddYOffset;
         private float _oddXOffset;
-
+        private float _scale;
         private Vector2Int _gridSize;
+        
+        public List<GridObject> Objects => _objectInstances.Values.ToList();
+        public float Scale => _scale;
         
         public GameGrid(
             Env env,
@@ -86,8 +89,8 @@ namespace Game
 
         public void Resize(Vector2Int size, Vector3 backgroundPosition)
         {
-            float scale = (float)_gridLevels.levels[0].size.x / size.x;
-            Vector3 scale3 = new Vector3(scale, scale, 1);
+            _scale = (float)_gridLevels.levels[0].size.x / size.x;
+            Vector3 scale3 = new Vector3(_scale, _scale, 1);
 
             _transform.localScale = scale3;
 

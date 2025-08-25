@@ -1,5 +1,6 @@
 using Zenject;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game
 {
@@ -8,6 +9,7 @@ namespace Game
         [SerializeField] private Transform _gameGrid;
         [SerializeField] private GridPrefabs _gridPrefabs;
         [SerializeField] private GridPointer _gridPointer;
+        [SerializeField] private GridDragDrop _gridDragDrop;
         [SerializeField] private GridLevels _gridLevels;
         [SerializeField] private Env _env;
         [SerializeField] private Quests _quests;
@@ -15,6 +17,9 @@ namespace Game
         [SerializeField] private LifeController _lifeController;
         [SerializeField] private AchievementsDB _achievementsDB;
         [SerializeField] private ParticleSystem _flashRoundParticle;
+        
+        [SerializeField] private Transform _mergeAdvicesGroup;
+        [SerializeField] private MergeAdviceParticle _mergeAdvice;
         
         private SaveController _saveController;
         
@@ -32,6 +37,7 @@ namespace Game
             Container.Bind<GridData>().FromInstance(GridData.k_defaultData).WhenInjectedInto<GameGrid>();
             Container.Bind<GridLevels>().FromInstance(_gridLevels);
             Container.Bind<GridPointer>().FromInstance(_gridPointer);
+            Container.Bind<GridDragDrop>().FromInstance(_gridDragDrop);
 
             Container.Bind<ResourceManager>().AsSingle().NonLazy();
             Container.Bind<ResourceData>().FromInstance(ResourceData.k_defaultData).WhenInjectedInto<ResourceManager>();
@@ -43,8 +49,15 @@ namespace Game
             Container.Bind<Tradesman>().FromInstance(_tradesman).AsSingle();
 
             Container.Bind<ParticleSystem>().WithId(Env.k_flashParticleId).FromInstance(_flashRoundParticle);
+
+            Container.BindMemoryPool<MergeAdviceParticle, MergeAdvicePool>()
+                .WithInitialSize(10)
+                .FromComponentInNewPrefab(_mergeAdvice)
+                .UnderTransform(_mergeAdvicesGroup);
             
             _saveController = Container.Instantiate<SaveController>();
+
+            Container.Instantiate<MergeAdvicesController>();
         }
 
         public void OnEnable()
