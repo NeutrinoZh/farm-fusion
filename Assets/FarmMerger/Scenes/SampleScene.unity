@@ -2211,6 +2211,7 @@ Transform:
   - {fileID: 289523715}
   - {fileID: 507867560}
   - {fileID: 1130909319}
+  - {fileID: 1624638504}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1168797516
@@ -2917,6 +2918,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1624638503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1624638504}
+  m_Layer: 0
+  m_Name: CoinsFloatTexts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1624638504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624638503}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135441975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1640543524
 GameObject:
   m_ObjectHideFlags: 0
@@ -3359,6 +3391,8 @@ MonoBehaviour:
   _flashRoundParticle: {fileID: 776923818}
   _mergeAdvicesGroup: {fileID: 1130909319}
   _mergeAdvice: {fileID: 6363652081083630878, guid: b219c04f384e7f345bb8ae1fef443965, type: 3}
+  _coinsFloatTextsGroup: {fileID: 1624638504}
+  _coinsFloatText: {fileID: 2714832103768941338, guid: 10866e492571e134f8bb74d1983960c5, type: 3}
 --- !u!1 &2116326311
 GameObject:
   m_ObjectHideFlags: 0

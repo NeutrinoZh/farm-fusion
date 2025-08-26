@@ -10,7 +10,6 @@ namespace Game {
         
         private readonly List<MergeAdviceParticle> _advices;
         
-        
         public MergeAdvicesController(GameGrid grid, GridDragDrop dragAndDrop, MergeAdvicePool mergeAdvicePool)
         {
             _advices = new();

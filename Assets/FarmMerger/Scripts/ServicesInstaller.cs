@@ -20,6 +20,9 @@ namespace Game
         
         [SerializeField] private Transform _mergeAdvicesGroup;
         [SerializeField] private MergeAdviceParticle _mergeAdvice;
+
+        [SerializeField] private Transform _coinsFloatTextsGroup;
+        [SerializeField] private CoinsFloatText _coinsFloatText;
         
         private SaveController _saveController;
         
@@ -51,13 +54,19 @@ namespace Game
             Container.Bind<ParticleSystem>().WithId(Env.k_flashParticleId).FromInstance(_flashRoundParticle);
 
             Container.BindMemoryPool<MergeAdviceParticle, MergeAdvicePool>()
-                .WithInitialSize(10)
+                .WithInitialSize(5)
                 .FromComponentInNewPrefab(_mergeAdvice)
                 .UnderTransform(_mergeAdvicesGroup);
+
+            Container.BindMemoryPool<CoinsFloatText, CoinsFloatText.CoinsFloatTextPool>()
+                .WithInitialSize(5)
+                .FromComponentInNewPrefab(_coinsFloatText)
+                .UnderTransform(_coinsFloatTextsGroup);
             
             _saveController = Container.Instantiate<SaveController>();
 
             Container.Instantiate<MergeAdvicesController>();
+            Container.Instantiate<CoinsFloatTextController>();
         }
 
         public void OnEnable()
