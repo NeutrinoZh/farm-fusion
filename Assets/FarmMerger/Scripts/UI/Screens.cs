@@ -32,7 +32,8 @@ namespace Game
         private const string k_questsId = "SidePanel";
         private const string k_rewardPopupId = "AwardPopup";
         private const string k_achievementPopupId = "AchievementPopup";
-
+        private const string k_notEnoughEnergyPopupId = "NotEnoughEnergyPopup";
+        
         private const int k_bottomOffsetHide = -600;
         private const int k_bottomOffsetShow = 0;
         
@@ -50,6 +51,7 @@ namespace Game
         private VisualElement _questsGroup;
         private VisualElement _rewardPopup;
         private VisualElement _achievementPopup;
+        private VisualElement _notEnoughEnergyPopup;
 
         private GridUI _gridUI;
         private QuestsUI _questsUI;
@@ -59,6 +61,7 @@ namespace Game
         private PurchasePopup _purchasePopupUI;
         private RewardPopup _rewardPopupUI;
         private AchievementPopup _achievementPopupUI;
+        private NotEnoughEnergyPopup _notEnoughEnergyPopupUI;
         
         private DiContainer _diContainer;
 
@@ -82,6 +85,7 @@ namespace Game
             _questsGroup = root.Q<VisualElement>(k_questsId);
             _rewardPopup = root.Q<VisualElement>(k_rewardPopupId);
             _achievementPopup = root.Q<VisualElement>(k_achievementPopupId);
+            _notEnoughEnergyPopup = root.Q<VisualElement>(k_notEnoughEnergyPopupId);
             
             _gridUI = new GridUI(this, _uiDocument, _diContainer.Resolve<ResourceManager>());
             _diContainer.Bind<GridUI>().FromInstance(_gridUI);
@@ -102,15 +106,20 @@ namespace Game
             _diContainer.Bind<RewardPopup>().FromInstance(_rewardPopupUI);
 
             _achievementPopupUI = _diContainer.Instantiate<AchievementPopup>(new object[]{
-                this, _achievementPopup  
+                _achievementPopup  
             });
             _diContainer.Bind<AchievementPopup>().FromInstance(_achievementPopupUI);
             
             _achievementUI = _diContainer.Instantiate<AchievementUI>(new object[]{
-                this, _achievementTemplate, _achievementGroup
+                _achievementTemplate, _achievementGroup
             });
+
+            _notEnoughEnergyPopupUI = _diContainer.Instantiate<NotEnoughEnergyPopup>(new object[]
+            {
+                _notEnoughEnergyPopup
+            });
+            _diContainer.Bind<NotEnoughEnergyPopup>().FromInstance(_notEnoughEnergyPopupUI);
             
-            _diContainer.Bind<Screens>().FromInstance(this);
             _diContainer.Instantiate<ShopController>();
             _diContainer.Instantiate<RewardController>();
 
@@ -142,7 +151,7 @@ namespace Game
             _achievementGroup.style.bottom = k_bottomOffsetShow;
             OnShowAchievements?.Invoke();
         }
-
+        
         public void ShowMap()
         {
             HideAll();
@@ -184,11 +193,20 @@ namespace Game
             _foggingGroup.style.opacity = k_opacityShow;
         }
         
+        
+        public void ShowNotEnoughEnergy()
+        {
+            _notEnoughEnergyPopup.style.bottom = k_bottomOffsetShow;
+            _foggingGroup.style.display = DisplayStyle.Flex;
+            _foggingGroup.style.opacity = k_opacityShow;
+        }
+        
         public void HidePopups()
         {
             _rewardPopup.style.bottom = k_bottomOffsetHide;
             _purchasePopup.style.bottom = k_bottomOffsetHide;
             _achievementPopup.style.bottom = k_bottomOffsetHide;
+            _notEnoughEnergyPopup.style.bottom = k_bottomOffsetHide;
             _foggingGroup.style.opacity = k_opacityHide;
             
             StartCoroutine(SwitcherDisplayPopupCoroutine());

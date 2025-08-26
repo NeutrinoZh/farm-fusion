@@ -83,9 +83,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="AchievementPopup" style="flex-grow: 1; width: 80%; height: 45%; max-height: 45%; min-height: 45%; position: absolute; bottom: -600px; align-items: stretch; justify-content: flex-start; align-self: center; background-color: rgb(253, 243, 255); translate: 0 -180px; border-left-color: rgb(141, 219, 249); border-right-color: rgb(141, 219, 249); border-top-color: rgb(141, 219, 249); border-bottom-color: rgb(141, 219, 249); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-top-left-radius: 5%; border-top-right-radius: 5%; border-bottom-right-radius: 5%; border-bottom-left-radius: 5%;">
-            <ui:VisualElement name="Header" style="flex-grow: 1; align-items: flex-end; padding-top: 3%; padding-right: 5%; padding-bottom: 0; padding-left: 5%; justify-content: center;">
-                <ui:VisualElement name="CloseButton" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/FarmMerger/Art/UI/Close.png?fileID=2800000&amp;guid=0550ed2ca0947cb47be5c40d5f2be3b4&amp;type=3#Close&quot;); width: 16px; height: 17px; max-width: 16px; min-width: 16px; max-height: 17px; min-height: 17px;" />
-            </ui:VisualElement>
+            <ui:VisualElement name="Header" style="flex-grow: 1; align-items: flex-end; padding-top: 3%; padding-right: 5%; padding-bottom: 0; padding-left: 5%; justify-content: center;" />
             <ui:VisualElement name="IconAchievement" style="flex-grow: 1; justify-content: center; align-items: center; height: 90px; max-height: 90px; min-height: 90px; top: -10px;">
                 <ui:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/FarmMerger/Art/Animals/Pig/pig_6.png?fileID=2800000&amp;guid=5312c945e812f1c48820070544e2438c&amp;type=3#pig_6&quot;); width: 90px; height: 80px; max-width: 90px; min-width: 90px; max-height: 80px; min-height: 80px;" />
             </ui:VisualElement>
@@ -124,7 +122,7 @@
                 <ui:VisualElement name="CloseButton" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/FarmMerger/Art/UI/Close.png?fileID=2800000&amp;guid=0550ed2ca0947cb47be5c40d5f2be3b4&amp;type=3#Close&quot;); width: 16px; height: 17px; max-width: 16px; min-width: 16px; max-height: 17px; min-height: 17px;" />
             </ui:VisualElement>
             <ui:VisualElement name="IconAward" style="flex-grow: 1; justify-content: center; align-items: center; height: 90px; max-height: 90px; min-height: 90px; top: -10px;">
-                <ui:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/FarmMerger/Art/UI/Energy.png?fileID=2800000&amp;guid=4e0b8023ca181274485f840c56ff5b9b&amp;type=3#Energy&quot;); width: 80px; height: 70px; max-width: 80px; min-width: 80px; max-height: 70px; min-height: 70px;" />
+                <ui:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/FarmMerger/Art/UI/Icon_ColorIcon_Block.png?fileID=2800000&amp;guid=4af28c96819d9db4391592939f13f292&amp;type=3#Icon_ColorIcon_Block&quot;); width: 80px; height: 80px; max-width: 80px; min-width: 80px; max-height: 80px; min-height: 80px;" />
             </ui:VisualElement>
             <ui:Label tabindex="-1" text="Not enough energy!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Description" style="font-size: 9px; -unity-text-align: upper-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 7%; padding-right: 0; padding-bottom: 0; padding-left: 0; top: -10px; -unity-font-style: bold;" />
             <ui:VisualElement name="Button" style="flex-grow: 1; justify-content: flex-start; align-items: center; margin-top: 0; top: -10px;">

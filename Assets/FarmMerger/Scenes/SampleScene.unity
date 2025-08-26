@@ -3393,6 +3393,7 @@ MonoBehaviour:
   _mergeAdvice: {fileID: 6363652081083630878, guid: b219c04f384e7f345bb8ae1fef443965, type: 3}
   _coinsFloatTextsGroup: {fileID: 1624638504}
   _coinsFloatText: {fileID: 2714832103768941338, guid: 10866e492571e134f8bb74d1983960c5, type: 3}
+  _screens: {fileID: 796973649}
 --- !u!1 &2116326311
 GameObject:
   m_ObjectHideFlags: 0

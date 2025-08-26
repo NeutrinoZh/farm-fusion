@@ -23,6 +23,8 @@ namespace Game
 
         [SerializeField] private Transform _coinsFloatTextsGroup;
         [SerializeField] private CoinsFloatText _coinsFloatText;
+
+        [SerializeField] private Screens _screens;
         
         private SaveController _saveController;
         
@@ -33,8 +35,9 @@ namespace Game
             Container.Bind<Env>().FromInstance(_env);
             Container.Bind<UpgradesManager>().FromInstance(new UpgradesManager(UpgradesData.k_defaultData));
 
+            Container.Bind<Screens>().FromInstance(_screens);
+            
             Container.Bind<GridPrefabs>().FromInstance(_gridPrefabs);
-
             Container.Bind<GameGrid>().AsSingle().NonLazy();
             Container.Bind<Transform>().FromInstance(_gameGrid).WhenInjectedInto<GameGrid>();
             Container.Bind<GridData>().FromInstance(GridData.k_defaultData).WhenInjectedInto<GameGrid>();
@@ -51,6 +54,8 @@ namespace Game
             
             Container.Bind<Tradesman>().FromInstance(_tradesman).AsSingle();
 
+            Container.Bind<NotEnoughEnergyPopupController>().AsSingle().NonLazy();
+            
             Container.Bind<ParticleSystem>().WithId(Env.k_flashParticleId).FromInstance(_flashRoundParticle);
 
             Container.BindMemoryPool<MergeAdviceParticle, MergeAdvicePool>()
