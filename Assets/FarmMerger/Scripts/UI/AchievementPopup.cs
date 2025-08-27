@@ -10,7 +10,6 @@ namespace Game
         private const string k_rewardLabelId = "AwardLabel";
         private const string k_descriptionId = "Description";
         private const string k_collectButtonId = "CollectRewardButton";
-        private const string k_closeButtonId = "CloseButton";
         
         private readonly Screens _screens;
 
@@ -32,20 +31,12 @@ namespace Game
             _collectButton = popup.Q<VisualElement>(k_collectButtonId);
             _descriptionLabel = popup.Q<Label>(k_descriptionId);
             
-            _collectButton.RegisterCallback<PointerDownEvent>(e => HandleClick());
-
-            var closeButton = popup.Q<VisualElement>(k_closeButtonId);
-            closeButton.RegisterCallback<PointerDownEvent>(e => CloseButtonHandle());
+            _collectButton.RegisterCallback<PointerDownEvent>(e => HandleClick()); 
         }
 
         ~AchievementPopup()
         {
             _collectButton.UnregisterCallback<PointerDownEvent>(e => HandleClick());
-        }
-        
-        private void CloseButtonHandle()
-        {
-            _screens.HidePopups();
         }
         
         private void HandleClick()
